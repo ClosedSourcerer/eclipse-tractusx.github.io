@@ -99,7 +99,7 @@ If either customer or supplier identify a problem they can collaborate by exchan
 
 Tools available to the customer for solving problems are fairly limited. They can increase or decrease demand quantities.
 
-The supplier on the other hand has more options to solve problems. They can not only increase and decrease capacity quantities, but also use flexible capacity, load factors and delta production.
+The supplier on the other hand has more options to solve problems. They can not only increase and decrease capacity quantities, but also use Flexible Capacity, load factors and delta production.
 
 ## Material Demand
 
@@ -425,11 +425,294 @@ D["Agreed Capacity"] style D fill:#219dd4,color:#F4F2F3
 
 Embedded into the WeekBasedCapacityGroup are
 
-- **actual capacity** as the  planned available capacity of a supplier
-- **maximum capacity** as the maximum releasable capacity of a supplier
-- **agreed capacity**  as the understanding between customer and supplier, regardless of contractual obligations. It is optional.
+- **Actual Capacity** as the  planned available capacity of a supplier
+- **Maximum Capacity** as the maximum releasable capacity of a supplier
+- **Agreed Capacity**  as the understanding between customer and supplier, regardless of contractual obligations. It is optional.
 
-In addition the difference between actual capacity and maximum capacity is commonly understood as **flexible capacity**.
+In addition the difference between Actual capacity and Maximum capacity is commonly understood as **Flexible Capacity**.
+
+The following examples illustrate how to use the "Capacities" properties
+
+#### Example 1: Simple Case
+
+![Capacity Example](./resources/business-process_capacity-types_example1.svg)
+
+
+<!--
+```mermaid
+---
+
+---
+---
+config:
+ xyChart:
+        width: 1200
+        height: 400
+        titlePadding: 10
+        titleFontSize: 20
+        showTitle: true
+        plotReservedSpacePercent: 50
+ themeVariables:
+        xyChart:
+            backgroundColor: "#000000"
+            titleColor: "#F4F2F3"
+            xAxisLabelColor: "#F4F2F3"
+            xAxisTitleColor: "#F4F2F3"
+            xAxisTickColor: "#F4F2F3"
+            xAxisLineColor: "#F4F2F3"
+            yAxisLabelColor: "#F4F2F3"
+            yAxisTitleColor: "#F4F2F3"
+            yAxisTickColor: "#F4F2F3"
+            yAxisLineColor: "#F4F2F3"
+            plotColorPalette: "#FFA600,#d91e18,#809500,#ffffff,#00ffff"
+---
+   
+   
+    xychart-beta
+    title "Example 1"
+    x-axis [Week14, Week15, Week16, Week17, Week18, Week19, Week20, Week21, Week22, Week23]
+    y-axis "." 0 -> 2000
+    bar Demand Over Actual but within Actual Capacity Orange [0,0,0,0,0,0,0,0,0,0]
+    bar Demand Over Actual Capacity Red [0,0,0,0,0,0,0,0,0,0]
+    bar Demand within Actual Capacity Green [870, 900, 980, 905, 950, 912, 940, 1150, 1390, 1478]
+    line Actual Capacity [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1250, 1500,1500]
+    line Maximum Capacity [1800, 1800,1800,1800,1800,1800,1800,1800,1800,1800]
+
+```
+-->
+Figure: 
+
+![Capacity Example](./resources/business-process_capacity-types_example_legend.svg)
+<!--
+```mermaid
+---
+
+---
+
+block-beta
+columns 3
+A["Demand over Actual capacity"] style A fill:#d91e18,color:#F4F2F3
+B["Demand over Actual but within Maximum Capacity"] style B fill:#FFA600,color:#F4F2F3
+C["Demand within Actual capacity"] style C fill:#809500,color:#F4F2F3
+D["Actual Capacity"] style D fill:#FFFFFF,color:#000000
+E["Maximum Capacity"] style E fill:#046b99,color:#0000FF
+```
+-->
+Figure: *Visualizing Capacity and Demand*
+
+We are in Week01, and we focus on a mid-term horizon starting in Week14, for a certain Capacity Group.
+Current capacity plan at Supplier for this horizon is
+- 1000 units per week from Week14 (10 shifts per week) to Week20
+- 1500 units per week from Week22 onwards (15 shifts per week), with a rampup step in Week21
+
+This plan is reflected in the Actual Capacity of DCM.
+
+When matching Demand to Capacity, one will see that
+- Actual Capacity is sufficient to cover Demand.
+- Maximum Capacity can be available to cover potential increase of the Demand up until 1800
+
+#### Example 2: Imbalance
+
+![Capacity Example](./resources/business-process_capacity-types_example2.svg)
+<!--
+```mermaid
+
+---
+config:
+ xyChart:
+        width: 1200
+        height: 400
+        titlePadding: 10
+        titleFontSize: 20
+        showTitle: true
+        plotReservedSpacePercent: 50
+ themeVariables:
+        xyChart:
+            backgroundColor: "#000000"
+            titleColor: "#F4F2F3"
+            xAxisLabelColor: "#F4F2F3"
+            xAxisTitleColor: "#F4F2F3"
+            xAxisTickColor: "#F4F2F3"
+            xAxisLineColor: "#F4F2F3"
+            yAxisLabelColor: "#F4F2F3"
+            yAxisTitleColor: "#F4F2F3"
+            yAxisTickColor: "#F4F2F3"
+            yAxisLineColor: "#F4F2F3"
+            plotColorPalette: "#FFA600,#d91e18,#809500,#ffffff,#00ffff"
+---
+   
+   
+    xychart-beta
+    title "Example 2"
+    x-axis [Week14, Week15, Week16, Week17, Week18, Week19, Week20, Week21, Week22, Week23]
+    y-axis "." 0 -> 2000
+    bar Demand Over Actual but within Actual Capacity Orange [0,1100,1200,1318,1150,1254,1110,0,0,0]
+    bar Demand Over Actual Capacity Red [0,0,0,0,0,0,0,0,0,0]
+    bar Demand within Actual Capacity Green [1000, 0, 0, 0, 0, 0, 0, 1150, 1390, 1478]
+    line Actual Capacity [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1250, 1500,1500]
+    line Maximum Capacity [1800, 1800,1800,1800,1800,1800,1800,1800,1800,1800]
+
+```
+-->
+![Capacity Example](./resources/business-process_capacity-types_example_legend.svg)
+
+Figure: *Visualizing Capacity and Demand*
+
+We are, here again, in Week01, considering the horizon from Week14 onwards.
+Demand has increased in the period between Week15 and Week20, and now exceeds Actual Capacity. 
+
+On Supplier side: Supplier should detect that Actual Capacity is insufficient, using its DCM Software, and conclude that measures should be activated to cover Demand. As Demand is below Maximum Capacity, Supplier knows that it is feasible. Eventually, Supplier should update its Actual Capacity to reflect those measures.
+
+On Customer side: when validating its own production plan, Customer may consider utilizing the Supplier’s flexibility up to the Maximum Capacity and conclude that feasibility is OK.
+
+#### Example 3:  Full Capacity Saturation
+
+![Capacity Example](./resources/business-process_capacity-types_example3.svg)
+<!--
+```mermaid
+---
+
+---
+config:
+ xyChart:
+        width: 1200
+        height: 700
+        titlePadding: 10
+        titleFontSize: 20
+        showTitle: true
+        plotReservedSpacePercent: 50
+ themeVariables:
+        xyChart:
+            backgroundColor: "#000000"
+            titleColor: "#F4F2F3"
+            xAxisLabelColor: "#F4F2F3"
+            xAxisTitleColor: "#F4F2F3"
+            xAxisTickColor: "#F4F2F3"
+            xAxisLineColor: "#F4F2F3"
+            yAxisLabelColor: "#F4F2F3"
+            yAxisTitleColor: "#F4F2F3"
+            yAxisTickColor: "#F4F2F3"
+            yAxisLineColor: "#F4F2F3"
+            plotColorPalette: "#FFA600,#d91e18,#809500,#ffffff,#046b99"
+---
+   
+   
+    xychart-beta
+    title "Example 3: Capacity Group close to saturation"
+    x-axis [Week14, Week15, Week16, Week17, Week18, Week19, Week20, Week21, Week22, Week23]
+    y-axis "." 0 -> 2000
+    bar Demand Over Actual but within Actual Capacity Orange [0,0,0,0,0,0,0,0,0,0]
+    bar Demand Over Actual Capacity Red [0,0,0,0,0,0,0,0,0,0]
+    bar Demand within Actual Capacity Green [1788, 1786, 1770, 1767, 1788, 1780, 1770, 1760, 1750, 1789]
+    line Actual Capacity [1790, 1790,1790,1790, 1790,1790,1790, 1790,1790,1790]
+    line Maximum Capacity [1800, 1800,1800,1800,1800,1800,1800,1800,1800,1800]
+
+```
+-->
+![Capacity Example](./resources/business-process_capacity-types_example_legend.svg)
+
+Figure: *Visualizing Capacity and Demand*
+
+Actual Capacity is equal to Maximum Capacity, and Demand is very close.
+Though no lack of capacity is detected, even a slight increase of Demand could not be managed.  Both Supplier and Customer can conclude, that it may be relevant to collaborate to identify measures to mitigate risk.
+
+#### Example 4: Solving a Capacity Bottleneck
+
+<!--
+```mermaid
+---
+---
+config:
+ xyChart:
+        width: 1200
+        height: 420
+        titlePadding: 10
+        titleFontSize: 20
+        showTitle: true
+        plotReservedSpacePercent: 50
+ themeVariables:
+        xyChart:
+            backgroundColor: "#000000"
+            titleColor: "#F4F2F3"
+            xAxisLabelColor: "#F4F2F3"
+            xAxisTitleColor: "#F4F2F3"
+            xAxisTickColor: "#F4F2F3"
+            xAxisLineColor: "#F4F2F3"
+            yAxisLabelColor: "#F4F2F3"
+            yAxisTitleColor: "#F4F2F3"
+            yAxisTickColor: "#F4F2F3"
+            yAxisLineColor: "#F4F2F3"
+            plotColorPalette: "#FFA600,#d91e18,#809500,#ffffff,#00ffff"
+---
+   
+   
+    xychart-beta
+    title "Example 4a"
+    x-axis [Week14, Week15, Week16, Week17, Week18, Week19, Week20, Week21, Week22, Week23]
+    y-axis "." 0 -> 2200
+    bar Demand Over Actual but within Actual Capacity Orange [0,0,0,0,0,0,0,0,0,0]
+    bar Demand Over Actual Capacity Red [0,0,0,0,0,1950,1950,1950,0,0]
+    bar Demand within Actual Capacity Green [1780, 1775, 1775, 1775, 1770, 0, 0, 0, 1770, 1770]
+    line Actual Capacity [1785, 1785,1785, 1785, 1785, 1785,1785, 1785,1785, 1785]
+    line Maximum Capacity [1800, 1800,1800,1800,1800,1800,1800,1800,1800,1800]
+```
+-->
+![Capacity Example](./resources/business-process_capacity-types_example4a.svg)
+
+![Capacity Example](./resources/business-process_capacity-types_example_legend.svg)
+
+Figure: *Visualizing Capacity and Demand*
+
+Imbalance is detected in Week19 to Week21: Demand exceeds Maximum Capacity.
+Supplier and Customer collaborate and validate an action plan, e.g. consisting in increasing production capacity from Week19 to Week21
+If so, Actual and Maximum Capacity must be updated to reflect the result of the collaboration. As a result, the bottleneck disappears, as exemplified in graph 4b below.
+
+
+<!--
+```mermaid
+---
+---
+config:
+ xyChart:
+        width: 1200
+        height: 420
+        titlePadding: 10
+        titleFontSize: 20
+        showTitle: true
+        plotReservedSpacePercent: 50
+ themeVariables:
+        xyChart:
+            backgroundColor: "#000000"
+            titleColor: "#F4F2F3"
+            xAxisLabelColor: "#F4F2F3"
+            xAxisTitleColor: "#F4F2F3"
+            xAxisTickColor: "#F4F2F3"
+            xAxisLineColor: "#F4F2F3"
+            yAxisLabelColor: "#F4F2F3"
+            yAxisTitleColor: "#F4F2F3"
+            yAxisTickColor: "#F4F2F3"
+            yAxisLineColor: "#F4F2F3"
+            plotColorPalette: "#FFA600,#d91e18,#809500,#ffffff,#00ffff"
+---
+   
+   
+    xychart-beta
+    title "Example 4b"
+    x-axis [Week14, Week15, Week16, Week17, Week18, Week19, Week20, Week21, Week22, Week23]
+    y-axis "." 0 -> 2200
+    bar Demand Over Actual but within Actual Capacity Orange [0,0,0,0,0,0,0,0,0,0]
+    bar Demand Over Actual Capacity Red [0,0,0,0,0,0,0,0,0,0]
+    bar Demand within Actual Capacity Green [1780, 1775, 1775, 1775, 1770, 1930, 1930, 1930, 1770, 1770]
+    line Actual Capacity [1785, 1785,1785, 1785, 1785, 1935, 1935, 1935,1785, 1785]
+    line Maximum Capacity [1800, 1800,1800,1800,1800,1950, 1950, 1950,1800,1800]
+```
+-->
+![Capacity Example](./resources/business-process_capacity-types_example4b.svg)
+
+![Capacity Example](./resources/business-process_capacity-types_example_legend.svg)
+
+
+
 
 ### WeekBasedCapacityGroup Properties
 
@@ -452,9 +735,9 @@ Further properties are added at lower level below the “Capacities” property.
 
 |Properties|Description|
 |-|-|
-|Actual Capacity|The actual capacity is the realistically planned output per calendar week and material for a specific customer in a specific unit of measure, considering all positive or negative impacts on this capacity|
-|Agreed Capacity|The agreed capacity of a supplier for a specific customer material(s) within a capacity group. The agreed capacity must not constitute a legal obligation to deliver.|
-|Maximum Capacity|The supplier's maximum capacity is the maximal available output per calendar week and material for a specific customer in a specific unit of measure. The maximum capacity thereby restricts the flexible capacity, as the flexible capacity is obtained from the difference of a supplier maximum capacity minus actual capacity|
+|Actual Capacity|The Actual Capacity is the realistically planned output per calendar week and material for a specific customer in a specific unit of measure, considering all positive or negative impacts on this capacity|
+|Agreed Capacity|The Agreed Capacity of a supplier for a specific customer material(s) within a Capacity Group. The agreed capacity must not constitute a legal obligation to deliver.|
+|Maximum Capacity|The supplier's Maximum Capacity is the maximal available output per calendar week and material for a specific customer in a specific unit of measure. The Maximum Capacity thereby restricts the Flexible Capacity, as the Flexible Capacity is obtained from the difference of a supplier Maximum Capacity minus Actual capacity|
 |Point in Time|ISO Calendar Week of the given time series entry. UstIt must be given as a date of the Monday in the week.|
 
 ### Linking Capacity Groups to Material Demands
@@ -728,7 +1011,7 @@ The standard describes exactly which scenario leads to the three possible matchi
 - Surplus
 - Bottleneck
 
-Within a DCM application those three matching results are commonly represented as a traffic light status, with zero deviation and surplus being green and bottleneck being orange or red, depending on whether demand is higher than maximum capacity or just actual capacity.
+Within a DCM application those three matching results are commonly represented as a traffic light status, with zero deviation and surplus being green and bottleneck being orange or red, depending on whether demand is higher than Maximum capacity or just Actual capacity.
 
 While customers might not feel impacted by a surplus, because the demand is matched, it still represents capacity that the supplier could better utilize.
 
@@ -782,9 +1065,9 @@ Figure: *Visualizing the comparison of demand and capacity quantities*
 ```mermaid
 block-beta
 columns 3
-A["Demand over actual capacity"] style A fill:#d91e18,color:#F4F2F3
-B["Demand over actual but within maximum capacity"] style B fill:#FFA600,color:#F4F2F3
-C["Demand within actual capacity"] style C fill:#809500,color:#F4F2F3
+A["Demand over Actual capacity"] style A fill:#d91e18,color:#F4F2F3
+B["Demand over Actual but within Maximum Capacity"] style B fill:#FFA600,color:#F4F2F3
+C["Demand within Actual Capacity"] style C fill:#809500,color:#F4F2F3
 D["Actual Capacity"] style D fill:#FFFFFF,color:#000000
 E["Maximum Capacity"] style E fill:#046b99,color:#000000
 F["Agreed Capacity"] style F fill:#219dd4,color:#000000
