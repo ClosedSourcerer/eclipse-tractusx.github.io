@@ -33,10 +33,55 @@ The main advantage of using simulated Delta-Production is that it gives supplier
 Simulated Delta-Production enables suppliers to add extra detail to their capacity information. This helps illustrate solutions for capacity issues or times when production resources might be offline. Only the end results of simulated Delta-Production are shared with the customer. Suppliers may input a simulated Delta-Production value for each week as needed, which shows an increase or decrease in planned demand without actually changing the real figures.
 
 ## Functional description
+```mermaid
+block-beta
+columns 10
+A1("WeekBasedCapacityGroup"):10
+B1("Supplier")
+B2("Customer")
+B3("CapacityGroupID")
+B4("changedAt")
+B5("Calendar Week"):3
+B8("DemandSeries"):3
+space
+C2("Inactive flag")
+C3("UnitOfMeasure")
+C4("CapacityGroupName")
+C5("ActualCapacity")
+C6("MaximumCapacity")
+C7("AgreedCapacity")
+C8("MaterialNumberCustomer")
+C9("DemandCategory")
+C10("CustomerLocation")
+space:6
+C11 ("DeltaProductionResult")
+space:1
+D8("PointInTime")
+D9("quantity")
 
-![DCM_DeltaProduction](./resources/business-process_DeltaProduction_functional.svg)
-![DCM_DeltaProduction_Legend](./resources/business-process_DeltaProduction_functional_legend.svg)
+classDef Demand_must fill:#FFA600,stroke:#FFFFFF,color:#000000
+classDef Capacity_must fill:#B3CB2D,stroke:#FFFFFF,color:#000000
+classDef Demand_optional fill:#BF7100,stroke:#FFFFFF,color:#000000
+classDef Capacity_optional fill:#617000,stroke:#FFFFFF,color:#000000
+class A1,B1,B2,B3,B4,B5,C4,C5,C6,C7,D5,D6,D7 Capacity_must
+class B8,C8,C9,C10,D8,D9 Demand_must
+class Demand_optional D10
+class C2,C3,C7 Capacity_optional
 
+style C11 fill:#617000,stroke:#d91e18,stroke-width:2px,color:#000000
+```
+
+```mermaid
+block-beta
+A("Demand data (MUST)") style A fill:#FFA600,color:#F4F2F3
+B("Demand data (optional)") style B fill:#BF7100,color:#F4F2F3
+C("Capacity data (MUST)") style C fill:#B3CB2D,color:#F4F2F3
+D("Capacity data (optional)") style D fill:#617000,color:#F4F2F3
+
+```
+
+<!---![DCM_DeltaProduction](./resources/business-process_DeltaProduction_functional.svg)
+![DCM_DeltaProduction_Legend](./resources/business-process_DeltaProduction_functional_legend.svg)--->
 Figure: *Capacity group structure with linked material demand including simulated Delta-Production Result*
 
 Simulated Delta-Production may be used within a capacity group to indicate how production can be adjusted to meet demand. It helps cover potential shortfalls by showing where goods could be produced earlier or later than currently demanded. Therefore simulated Delta-Production covers both pre-production and post-production activities.
