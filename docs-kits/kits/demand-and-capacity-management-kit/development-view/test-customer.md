@@ -236,6 +236,44 @@ Examples:
 
 </details>
 
+### WIP Prepare for nesting journey
+
+<details>
+<summary>This test ensures that the customer is aware of the sequence of communication and naming conventions within the nesting journey.</summary>
+
+```cucumber
+Feature: Customer: Prepare yourself
+  
+  Scenario Outline: Prepare for load factors journey
+  Given I want to execute the load factors journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the load factors journey successfully
+  When the test gets executed
+  Then it should work as intended
+
+Examples:
+| object   | function                                                                                 | test                                                                                                            |
+```
+
+</details>
+
+### WIP Prepare for inactivity journey
+
+<details>
+<summary>This test ensures that the customer is aware of the sequence of communication and naming conventions within the inactivity journey.</summary>
+
+```cucumber
+Feature: Customer: Prepare yourself
+  
+  Scenario Outline: Prepare for load factors journey
+  Given I want to execute the load factors journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the load factors journey successfully
+  When the test gets executed
+  Then it should work as intended
+
+Examples:
+| object   | function                                                                                 | test                                                                                                            |
+```
+
+</details>
+
 ## Customer: Create WeekBasedMaterialDemand
 
 ### Create valid WeekBasedMaterialDemand
@@ -564,6 +602,84 @@ Examples:
 
 </details>
 
+### WIP Create WeekBasedMaterialDemand for nesting journey
+
+<details>
+<summary>The customer creates one WeekBasedMaterialDemand used by the nesting journey.</summary>
+
+```cucumber
+Feature: Customer: Create WeekBasedMaterialDemand
+
+Scenario Outline: Try to generate WeekBasedMaterialDemand for load factors journey using different <v_tests>
+  Given   the value for the property "materialDemandId"               is <v_materialDemandId>
+  *       the value for the property "changedAt"                      is <v_changedAt>
+  *       the value for the property "customer"                       is <v_customer>
+  *       the value for the property "supplier"                       is <v_supplier>
+  *       the value for the property "materialDemandIsInactive"       is <v_materialDemandIsInactive>
+
+  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>
+  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>
+
+  *       the value for the property "materialGlobalAssetId"          is <v_materialGlobalAssetId>
+  *       the value for the property "materialNumberCustomer"         is <v_materialNumberCustomer>
+  *       the value for the property "materialNumberSupplier"         is <v_materialNumberSupplier>
+  *       the value for the property "materialDescriptionCustomer"    is <v_materialDescriptionCustomer>
+
+  *       the value for the property "demandSeries"                   contains entities
+  *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "DemandSeries"
+  *       the value for the property "expectedSupplierLocation"       is <1_expectedSupplierLocation> for the first   entity "DemandSeries"
+  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "DemandSeries"
+  *       the value for the property "demand"                         is <1_demand>                   for the first   entity "DemandSeries"
+  *       the value for the property "pointInTime"                    is <1_pointInTime>              for the first   entity "DemandSeries"
+  When the application tries to generate the WeekBasedCapacityGroup
+  Then it should generate the WeekBasedMaterialDemand
+
+Examples:
+| v_tests  | v_materialDemandId | v_changedAt | v_customer   | v_supplier   | v_materialDemandIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | v_materialGlobalAssetId | v_materialNumberCustomer | v_materialNumberSupplier | v_materialDescriptionCustomer | v_customerLocation | v_expectedSupplierLocation | v_demandCategoryCode | v_demand                        | v_pointInTime                                                                                                 |
+| MD_alpha | {{UUID_MD1}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA1}}            | MNR-8540-CH063329.001    | {{OMITTED}}              | {{DSC_MAT1}}                  | {{BPNS_CUS1}}      | {{BPNS_SUP1}}              | 0001                 | 80,50,100,75,60,90,20,110,225,0 | 2024-08-05,2026-05-18,2026-05-25,2026-06-01,2026-06-08,2026-06-15,2026-06-22,2026-06-29,2026-07-06,2026-07-13 |
+| MD_beta  | {{UUID_MD1}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA1}}            | MNR-8549-CH706214.023    | {{OMITTED}}              | {{DSC_MAT2}}                  | {{BPNS_CUS1}}      |                            | A1S1                 | 70,100,50,75,90,60,130,40,0,110 | 2024-08-05,2026-05-18,2026-05-25,2026-06-01,2026-06-08,2026-06-15,2026-06-22,2026-06-29,2026-07-06,2026-07-13 |
+```
+
+</details>
+
+### WIP Create WeekBasedMaterialDemand for inactivity journey
+
+<details>
+<summary>The customer creates one WeekBasedMaterialDemand used by the inactivity journey.</summary>
+
+```cucumber
+Feature: Customer: Create WeekBasedMaterialDemand
+
+Scenario Outline: Try to generate WeekBasedMaterialDemand for load factors journey using different <v_tests>
+  Given   the value for the property "materialDemandId"               is <v_materialDemandId>
+  *       the value for the property "changedAt"                      is <v_changedAt>
+  *       the value for the property "customer"                       is <v_customer>
+  *       the value for the property "supplier"                       is <v_supplier>
+  *       the value for the property "materialDemandIsInactive"       is <v_materialDemandIsInactive>
+
+  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>
+  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>
+
+  *       the value for the property "materialGlobalAssetId"          is <v_materialGlobalAssetId>
+  *       the value for the property "materialNumberCustomer"         is <v_materialNumberCustomer>
+  *       the value for the property "materialNumberSupplier"         is <v_materialNumberSupplier>
+  *       the value for the property "materialDescriptionCustomer"    is <v_materialDescriptionCustomer>
+
+  *       the value for the property "demandSeries"                   contains entities
+  *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "DemandSeries"
+  *       the value for the property "expectedSupplierLocation"       is <1_expectedSupplierLocation> for the first   entity "DemandSeries"
+  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "DemandSeries"
+  *       the value for the property "demand"                         is <1_demand>                   for the first   entity "DemandSeries"
+  *       the value for the property "pointInTime"                    is <1_pointInTime>              for the first   entity "DemandSeries"
+  When the application tries to generate the WeekBasedCapacityGroup
+  Then it should generate the WeekBasedMaterialDemand
+
+Examples:
+| v_tests  | v_materialDemandId | v_changedAt | v_customer   | v_supplier   | v_materialDemandIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | v_materialGlobalAssetId | v_materialNumberCustomer | v_materialNumberSupplier | v_materialDescriptionCustomer | v_customerLocation | v_expectedSupplierLocation | v_demandCategoryCode | v_demand                        | v_pointInTime                                                                                                 |
+```
+
+</details>
+
 ## Customer: Provide WeekBasedMaterialDemand
 
 ### Provide valid WeekBasedMaterialDemand
@@ -668,6 +784,46 @@ Examples:
 </details>
 
 ### Provide WeekBasedMaterialDemand for load factors journey
+
+<details>
+<summary>The customer sends the previously created WeekBasedMaterialDemand to the supplier.</summary>
+
+```cucumber
+Feature: Customer: Provide WeekBasedMaterialDemand
+
+Scenario Outline: Provide WeekBasedMaterialDemand for load factors journey
+  Given I have successfully created demand alpha as described in Create WeekBasedMaterialDemand for load factors journey
+  When I try to provide my supplier with <testDemand> as <fileTransfer>
+  Then I should get <http status code> from my supplier.
+
+Examples:
+| testDemand        | fileTransfer | http status code |
+| MD_alpha, MD_beta | FT_alpha     | 200 OK           |
+```
+
+</details>
+
+### WIP Provide WeekBasedMaterialDemand for nesting journey
+
+<details>
+<summary>The customer sends the previously created WeekBasedMaterialDemand to the supplier.</summary>
+
+```cucumber
+Feature: Customer: Provide WeekBasedMaterialDemand
+
+Scenario Outline: Provide WeekBasedMaterialDemand for load factors journey
+  Given I have successfully created demand alpha as described in Create WeekBasedMaterialDemand for load factors journey
+  When I try to provide my supplier with <testDemand> as <fileTransfer>
+  Then I should get <http status code> from my supplier.
+
+Examples:
+| testDemand        | fileTransfer | http status code |
+| MD_alpha, MD_beta | FT_alpha     | 200 OK           |
+```
+
+</details>
+
+### WIP Provide WeekBasedMaterialDemand for inactivity journey
 
 <details>
 <summary>The customer sends the previously created WeekBasedMaterialDemand to the supplier.</summary>
@@ -807,6 +963,45 @@ Examples:
 
 </details>
 
+### WIP Consume WeekBasedCapacityGroup for nesting journey
+
+<details>
+<summary>The customer receives the previously created WeekBasedCapacityGroup from the supplier.</summary>
+
+```cucumber
+Feature: Customer: Consume WeekBasedCapacityGroup
+
+Scenario Outline: Consume WeekBasedCapacityGroup for load factors journey
+  Given I have successfully created demand alpha as described in Create WeekBasedMaterialDemand for load factors journey
+  When I try to consume  <testCapacityGroup> provided by my supplier within <fileTransfer>
+  Then I should be able to consume the data and send <http status code> to my supplier.
+
+Examples:
+| testCapacityGroup | fileTransfer | http status code |
+| CG_alpha          | FT_beta      | 200 OK           |
+```
+
+</details>
+
+### WIP Consume WeekBasedCapacityGroup for inactivity journey
+
+<details>
+<summary>The customer receives the previously created WeekBasedCapacityGroup from the supplier.</summary>
+
+```cucumber
+Feature: Customer: Consume WeekBasedCapacityGroup
+
+Scenario Outline: Consume WeekBasedCapacityGroup for load factors journey
+  Given I have successfully created demand alpha as described in Create WeekBasedMaterialDemand for load factors journey
+  When I try to consume  <testCapacityGroup> provided by my supplier within <fileTransfer>
+  Then I should be able to consume the data and send <http status code> to my supplier.
+
+Examples:
+| testCapacityGroup | fileTransfer | http status code |
+| CG_alpha          | FT_beta      | 200 OK           |
+```
+
+</details>
 ## Customer: Visualize CapacityGroup together with MaterialDemand
 
 ### Bottleneck calculation
@@ -991,6 +1186,48 @@ Examples:
 | CG_alpha               | MD_beta                 | 27   | 2026 | 80        | 40          | unit:cycles                          | unit:pieces                 |
 | CG_alpha               | MD_beta                 | 28   | 2026 | 0         | 0           | unit:cycles                          | unit:pieces                 |
 | CG_alpha               | MD_beta                 | 29   | 2026 | 220       | 110         | unit:cycles                          | unit:pieces                 |
+```
+
+</details>
+
+### WIP Calculation for nesting journey
+
+<details>
+<summary>The customer compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes load factors into account.</summary>
+
+```cucumber
+Feature: Customer: Visualize CapacityGroup together with MaterialDemand
+
+Scenario Outline: Calculation for load factors journey
+  Given    I have successfully consumed <WeekBasedCapacityGroup>
+  *        I have successfully created <WeekBasedMaterialDemand>
+  When     I compare demand and capacity data for <WeekBasedCapacityGroup>
+  Then     I should see <UI demand> that differs from <data demand> for <week> in <year>.
+  *        I should see <capacity data and UI unit of measure> that differs from <demand data unit of measure>.
+
+Examples:
+| WeekBasedCapacityGroup | WeekBasedMaterialDemand | week | year | UI demand | data demand | capacity data and UI unit of measure | demand data unit of measure |
+```
+
+</details>
+
+### WIP Calculation for inactivity journey
+
+<details>
+<summary>The customer compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes load factors into account.</summary>
+
+```cucumber
+Feature: Customer: Visualize CapacityGroup together with MaterialDemand
+
+Scenario Outline: Calculation for load factors journey
+  Given    I have successfully consumed <WeekBasedCapacityGroup>
+  *        I have successfully created <WeekBasedMaterialDemand>
+  When     I compare demand and capacity data for <WeekBasedCapacityGroup>
+  Then     I should see <UI demand> that differs from <data demand> for <week> in <year>.
+  *        I should see <capacity data and UI unit of measure> that differs from <demand data unit of measure>.
+
+Examples:
+| WeekBasedCapacityGroup | WeekBasedMaterialDemand | week | year | UI demand | data demand | capacity data and UI unit of measure | demand data unit of measure |
 ```
 
 </details>
