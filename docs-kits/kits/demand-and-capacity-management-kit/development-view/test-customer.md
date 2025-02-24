@@ -68,10 +68,10 @@ Scenario Outline: Check wallet for certificates
   Then I should find a <credential> that corresponds to a <policy> 
 
 Examples:
-| credential                 | policy                     |
-| BPN-restricted Data Usage  | BPN-restricted Data Usage  |
-| Membership Credential      | Membership Credential      |
-| DataExchangeGovernance:1.0 | DataExchangeGovernance:1.0 |
+| credential                          | policy                     |
+| BUSINESS PARTNER NUMBER             | BPN-restricted Data Usage  |
+| MEMBERSHIP                          | Membership Credential      |
+| DATA EXCHANGE GOVERNANCE CREDENTIAL | DataExchangeGovernance:1.0 |
 ```
 
 </details>
