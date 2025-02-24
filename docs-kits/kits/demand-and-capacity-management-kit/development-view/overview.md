@@ -18,18 +18,18 @@ This document provides developers with resources to accelerate the development o
 
 [CX-0128 Demand and Capacity Management Data Exchange][StandardLibrary] describes the following capabilities:
 
-|Capability|Category|Related Aspect Models|Related APIs|
-|-|-|-|-|
-|Providing and consuming demand data|Core|WeekBasedMaterialDemand|WeekBasedMaterialDemand API|
-|Providing and consuming capacity data|Core|WeekBasedCapacityGroup|WeekBasedCapacityGroup API|
-|Comparing demand and capacity data|Core|WeekBasedMaterialDemand <br/> WeekBasedCapacityGroup|N/A|
-|Demand volatility metrics|Outer Core|WeekBasedCapacityGroup|WeekBasedCapacityGroup API|
-|Simulated delta production|Outer Core|WeekBasedCapacityGroup|WeekBasedCapacityGroup API|
-|Load factors|Outer Core|WeekBasedCapacityGroup|WeekBasedCapacityGroup API|
-|Digital twins|Extended|WeekBasedMaterialDemand <br/> WeekBasedCapacity Group|DCM Asset Administration Shell API|
-|Request for update|Extended|IdBasedRequestForUpdate|IdBasedRequestForUpdate AP|
-|Comments|Extended|IdBasedComment|IdBasedComment API|
-|Supply chain disruption notifications|Extended|demandAndCapacityNotification|DemandAndCapacityNotification API|
+| Capability                            | Category   | Related Aspect Models                                 | Related APIs                       |
+| -                                     | -          | -                                                     | -                                  |
+| Providing and consuming demand data   | Core       | WeekBasedMaterialDemand                               | WeekBasedMaterialDemand API        |
+| Providing and consuming capacity data | Core       | WeekBasedCapacityGroup                                | WeekBasedCapacityGroup API         |
+| Comparing demand and capacity data    | Core       | WeekBasedMaterialDemand <br/> WeekBasedCapacityGroup  | N/A                                |
+| Demand volatility metrics             | Outer Core | WeekBasedCapacityGroup                                | WeekBasedCapacityGroup API         |
+| Simulated delta production            | Outer Core | WeekBasedCapacityGroup                                | WeekBasedCapacityGroup API         |
+| Load factors                          | Outer Core | WeekBasedCapacityGroup                                | WeekBasedCapacityGroup API         |
+| Digital twins                         | Extended   | WeekBasedMaterialDemand <br/> WeekBasedCapacity Group | DCM Asset Administration Shell API |
+| Request for update                    | Extended   | IdBasedRequestForUpdate                               | IdBasedRequestForUpdate AP         |
+| Comments                              | Extended   | IdBasedComment                                        | IdBasedComment API                 |
+| Supply chain disruption notifications | Extended   | demandAndCapacityNotification                         | DemandAndCapacityNotification API  |
 
 - Core capabilities are mandatory within the standard.
 - Outer core capabilities share APIs and aspect models with core capabilities, but are optional.
@@ -41,11 +41,11 @@ A MVP approach can be followed when developing software, implementing CX-0128, b
 
 [CX-0128 Demand and Capacity Management Data Exchange][StandardLibrary] describes the business roles customer and supplier. In addition an admin role might be a sensible addition to any application. Most companies within a supply chain will have need of both business roles. Individual users within a company might need access to both business roles.
 
-|Role|Capabilities|
-|-|-|
-|Customer| - Modify WeekBasedMaterialDemand <br/> - Compare WeekBasedMaterialDemand to WeekBasedCapacityGroup <br/> - Utilize comments <br/> - Utilize supply chain disruption notification|
-|Supplier| - Modify WeekBasedCapacityGroup <br/> - Compare WeekBasedMaterialDemand to WeekBasedCapacityGroup <br/> - Link WeekBasedMaterialDemand to WeekBasedCapacityGroup <br/> - Utilize comments <br/> - Utilize supply chain disruption notification|
-|Admin| - Configure Request for update|
+| Role     | Capabilities                                                                                                                                                                                                                                   |
+| -        | -                                                                                                                                                                                                                                              |
+| Customer | - Modify WeekBasedMaterialDemand <br/> - Compare WeekBasedMaterialDemand to WeekBasedCapacityGroup <br/> - Utilize comments <br/> - Utilize supply chain disruption notification                                                               |
+| Supplier | - Modify WeekBasedCapacityGroup <br/> - Compare WeekBasedMaterialDemand to WeekBasedCapacityGroup <br/> - Link WeekBasedMaterialDemand to WeekBasedCapacityGroup <br/> - Utilize comments <br/> - Utilize supply chain disruption notification |
+| Admin    | - Configure Request for update                                                                                                                                                                                                                 |
 
 ## Aspect models utilized by a DCM application
 
@@ -138,41 +138,43 @@ It is recommended to compartmentalize tests into test-sets from which different 
 
 ### List of Test-Sets
 
-|Test-Set|Description|Tests in test-set|
-|--|--|--|
-|[Customer: Prepare yourself](./test-customer#customer-prepare-yourself)|Prepares customer for the user journey, by setting up EDC, data assets, wallet, certificates etc.|- Setup EDC<br/>- Register APIs as assets<br/>- Check wallet for certificates<br/>- Prepare variables for other tests<br/>- User journey specific preparation|
-|[Supplier: Prepare yourself](./test-supplier#supplier-prepare-yourself)|Prepares supplier for the user journey, by setting up EDC, data assets, wallet, certificates etc.|- Setup EDC<br/>- Register APIs as assets<br/>- Check wallet for certificates<br/>- Prepare variables for other tests<br/>- User journey specific preparation|
-|[Customer: Create WeekBasedMaterialDemand](./test-customer#customer-create-weekbasedmaterialdemand)|Tests the implementation of the aspect model|- Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model|
-|[Customer: Provide WeekBasedMaterialDemand](./test-customer#customer-provide-weekbasedmaterialdemand)|Tests communication via EDC|- Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload|
-|[Supplier: Consume WeekBasedMaterialDemand](./test-supplier#supplier-consume-weekbasedmaterialdemand)|Tests the implementation of the API and the aspect model|- Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload|
-|[Supplier: Create WeekBasedCapacityGroup](./test-supplier#supplier-create-weekbasedcapacitygroup)|Tests the implementation of the aspect model|- Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model|
-|[Supplier: Provide WeekBasedCapacityGroup](./test-supplier#supplier-provide-weekbasedcapacitygroup)|Tests communication via EDC|- Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload|
-|[Customer: Consume WeekBasedCapacityGroup](./test-customer#customer-consume-weekbasedcapacitygroup)|Tests the implementation of the API and the aspect model|- Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload|
-|[Customer: Visualize CapacityGroup together with MaterialDemand](./test-customer#customer-visualize-capacitygroup-together-with-materialdemand)|Minor user acceptance test|- Bottleneck calculation<br/>- Surplus calculation<br/>- Zero deviation calculation<br/>- User journey specific calculation|
-|[Supplier: Visualize CapacityGroup together with MaterialDemand](./test-supplier#supplier-visualize-capacitygroup-together-with-materialdemand)|Minor user acceptance test|- Bottleneck calculation<br/>- Surplus calculation<br/>- Zero deviation calculation<br/>- User journey specific calculation|
-|[Customer: Create IdBasedRequestForUpdate](./test-customer#customer-create-idbasedrequestforupdate)|Tests the implementation of the aspect model|- Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model|
-|[Customer: Provide IdBasedRequestForUpdate](./test-customer#customer-provide-idbasedrequestforupdate)|Tests communication via EDC|- Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload|
-|[Supplier: Consume IdBasedRequestForUpdate](./test-supplier#supplier-consume-idbasedrequestforupdate)|Tests the implementation of the API and the aspect model|- Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload|
-|[Supplier: Create IdBasedRequestForUpdate](./test-supplier#supplier-create-idbasedrequestforupdate)|Tests the implementation of the aspect model|- Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model|
-|[Supplier: Provide IdBasedRequestForUpdate](./test-supplier#supplier-provide-idbasedrequestforupdate)|Tests communication via EDC|- Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload|
-|[Customer: Consume IdBasedRequestForUpdate](./test-customer#customer-consume-idbasedrequestforupdate)|Tests the implementation of the API and the aspect model|- Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload|
-|[Customer: Create IdBasedComment](./test-customer#customer-create-idbasedcomment)|Tests the implementation of the aspect model|- Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model|
-|[Customer: Provide IdBasedComment](./test-customer#customer-provide-idbasedcomment)|Tests communication via EDC|- Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload|
-|[Supplier: Consume IdBasedComment](./test-supplier#supplier-consume-idbasedcomment)|Tests the implementation of the API and the aspect model|- Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload|
-|[Supplier: Create IdBasedComment](./test-supplier#supplier-create-idbasedcomment)|Tests the implementation of the aspect model|- Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model|
-|[Supplier: Provide IdBasedComment](./test-supplier#supplier-provide-idbasedcomment)|Tests communication via EDC|- Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload|
-|[Customer: Consume IdBasedComment](./test-customer#customer-consume-idbasedcomment)|Tests the implementation of the API and the aspect model|- Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload|
-|[Customer: Visualize IdBasedComment together with CapacityGroup and MaterialDemand](./test-customer#customer-visualize-idbasedcomment-together-with-capacitygroup-and-materialdemand)|Minor user acceptance test|- Comment linked to WeekbasedCapacityGroup<br/>- Comment linked to WeekbasedMaterialGroup<br/>- Comment linked to IdBasedComment|
-|[Supplier: Visualize IdBasedComment together with CapacityGroup and MaterialDemand](./test-supplier#supplier-visualize-idbasedcomment-together-with-capacitygroup-and-materialdemand)|Minor user acceptance test|- Comment linked to WeekbasedCapacityGroup<br/>- Comment linked to WeekbasedMaterialGroup<br/>- Comment linked to IdBasedComment|
+| Test-Set                                                                                                                                                                              | Description                                                                                       | Tests in test-set                                                                                                                                             |
+| --                                                                                                                                                                                    | --                                                                                                | --                                                                                                                                                            |
+| [Customer: Prepare yourself](./test-customer#customer-prepare-yourself)                                                                                                               | Prepares customer for the user journey, by setting up EDC, data assets, wallet, certificates etc. | - Setup EDC<br/>- Register APIs as assets<br/>- Check wallet for certificates<br/>- Prepare variables for other tests<br/>- User journey specific preparation |
+| [Supplier: Prepare yourself](./test-supplier#supplier-prepare-yourself)                                                                                                               | Prepares supplier for the user journey, by setting up EDC, data assets, wallet, certificates etc. | - Setup EDC<br/>- Register APIs as assets<br/>- Check wallet for certificates<br/>- Prepare variables for other tests<br/>- User journey specific preparation |
+| [Customer: Create WeekBasedMaterialDemand](./test-customer#customer-create-weekbasedmaterialdemand)                                                                                   | Tests the implementation of the aspect model                                                      | - Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model                                                 |
+| [Customer: Provide WeekBasedMaterialDemand](./test-customer#customer-provide-weekbasedmaterialdemand)                                                                                 | Tests communication via EDC                                                                       | - Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload                                                             |
+| [Supplier: Consume WeekBasedMaterialDemand](./test-supplier#supplier-consume-weekbasedmaterialdemand)                                                                                 | Tests the implementation of the API and the aspect model                                          | - Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload                                                             |
+| [Supplier: Create WeekBasedCapacityGroup](./test-supplier#supplier-create-weekbasedcapacitygroup)                                                                                     | Tests the implementation of the aspect model                                                      | - Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model                                                 |
+| [Supplier: Provide WeekBasedCapacityGroup](./test-supplier#supplier-provide-weekbasedcapacitygroup)                                                                                   | Tests communication via EDC                                                                       | - Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload                                                             |
+| [Customer: Consume WeekBasedCapacityGroup](./test-customer#customer-consume-weekbasedcapacitygroup)                                                                                   | Tests the implementation of the API and the aspect model                                          | - Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload                                                             |
+| [Customer: Visualize CapacityGroup together with MaterialDemand](./test-customer#customer-visualize-capacitygroup-together-with-materialdemand)                                       | Minor user acceptance test                                                                        | - Bottleneck calculation<br/>- Surplus calculation<br/>- Zero deviation calculation<br/>- User journey specific calculation                                   |
+| [Supplier: Visualize CapacityGroup together with MaterialDemand](./test-supplier#supplier-visualize-capacitygroup-together-with-materialdemand)                                       | Minor user acceptance test                                                                        | - Bottleneck calculation<br/>- Surplus calculation<br/>- Zero deviation calculation<br/>- User journey specific calculation                                   |
+| [Customer: Create IdBasedRequestForUpdate](./test-customer#customer-create-idbasedrequestforupdate)                                                                                   | Tests the implementation of the aspect model                                                      | - Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model                                                 |
+| [Customer: Provide IdBasedRequestForUpdate](./test-customer#customer-provide-idbasedrequestforupdate)                                                                                 | Tests communication via EDC                                                                       | - Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload                                                             |
+| [Supplier: Consume IdBasedRequestForUpdate](./test-supplier#supplier-consume-idbasedrequestforupdate)                                                                                 | Tests the implementation of the API and the aspect model                                          | - Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload                                                             |
+| [Supplier: Create IdBasedRequestForUpdate](./test-supplier#supplier-create-idbasedrequestforupdate)                                                                                   | Tests the implementation of the aspect model                                                      | - Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model                                                 |
+| [Supplier: Provide IdBasedRequestForUpdate](./test-supplier#supplier-provide-idbasedrequestforupdate)                                                                                 | Tests communication via EDC                                                                       | - Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload                                                             |
+| [Customer: Consume IdBasedRequestForUpdate](./test-customer#customer-consume-idbasedrequestforupdate)                                                                                 | Tests the implementation of the API and the aspect model                                          | - Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload                                                             |
+| [Customer: Create IdBasedComment](./test-customer#customer-create-idbasedcomment)                                                                                                     | Tests the implementation of the aspect model                                                      | - Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model                                                 |
+| [Customer: Provide IdBasedComment](./test-customer#customer-provide-idbasedcomment)                                                                                                   | Tests communication via EDC                                                                       | - Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload                                                             |
+| [Supplier: Consume IdBasedComment](./test-supplier#supplier-consume-idbasedcomment)                                                                                                   | Tests the implementation of the API and the aspect model                                          | - Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload                                                             |
+| [Supplier: Create IdBasedComment](./test-supplier#supplier-create-idbasedcomment)                                                                                                     | Tests the implementation of the aspect model                                                      | - Create valid aspect model<br/>- Create invalid aspect model<br/>- Create user journey specific aspect model                                                 |
+| [Supplier: Provide IdBasedComment](./test-supplier#supplier-provide-idbasedcomment)                                                                                                   | Tests communication via EDC                                                                       | - Provide valid payload<br/>- Provide invalid payload<br/>- Provide user journey specific payload                                                             |
+| [Customer: Consume IdBasedComment](./test-customer#customer-consume-idbasedcomment)                                                                                                   | Tests the implementation of the API and the aspect model                                          | - Consume valid payload<br/>- Consume invalid payload<br/>- Consume user journey specific payload                                                             |
+| [Customer: Visualize IdBasedComment together with CapacityGroup and MaterialDemand](./test-customer#customer-visualize-idbasedcomment-together-with-capacitygroup-and-materialdemand) | Minor user acceptance test                                                                        | - Comment linked to WeekbasedCapacityGroup<br/>- Comment linked to WeekbasedMaterialGroup<br/>- Comment linked to IdBasedComment                              |
+| [Supplier: Visualize IdBasedComment together with CapacityGroup and MaterialDemand](./test-supplier#supplier-visualize-idbasedcomment-together-with-capacitygroup-and-materialdemand) | Minor user acceptance test                                                                        | - Comment linked to WeekbasedCapacityGroup<br/>- Comment linked to WeekbasedMaterialGroup<br/>- Comment linked to IdBasedComment                              |
 
 ### List of User-Journeys
 
-|#|User Journey|Test-Sets|Tested Capabilities|
-|--|--|--|--|
-|1|[Base journey](#base-journey)|- Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand<br/> - Customer: Provide IdBasedRequestForUpdate<br/> - Supplier: Consume IdBasedRequestForUpdate<br/> - Supplier: Provide IdBasedRequestForUpdate<br/> - Customer: Consume IdBasedRequestForUpdate<br/> - Customer: Create IdBasedComment<br/> - Customer: Provide IdBasedComment<br/> - Supplier: Consume IdBasedComment<br/> - Supplier: Create IdBasedComment<br/> - Supplier: Provide IdBasedComment<br/> - Customer: Consume IdBasedComment<br/> - Customer: Visualize IdBasedComment together with CapacityGroup and MaterialDemand<br/> - Supplier: Visualize IdBasedComment together with CapacityGroup and MaterialDemand|- Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Request for update<br/> - Comments|
-|2|[Demand volatility metrics journey](#demand-volatility-metrics-journey)|- Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand|- Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Demand volatility metrics|
-|3|[Simulated delta production journey](#simulated-delta-production-journey)|- Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand|- Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Simulated delta production|
-|4|[Load factors journey](#load-factors-journey)|- Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand|- Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Load factors|
+| #  | User Journey                                                              | Test-Sets                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Tested Capabilities                                                                                                                                                    |
+| -- | --                                                                        | --                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | --                                                                                                                                                                     |
+| 1  | [Base journey](#base-journey)                                             | - Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand<br/> - Customer: Provide IdBasedRequestForUpdate<br/> - Supplier: Consume IdBasedRequestForUpdate<br/> - Supplier: Provide IdBasedRequestForUpdate<br/> - Customer: Consume IdBasedRequestForUpdate<br/> - Customer: Create IdBasedComment<br/> - Customer: Provide IdBasedComment<br/> - Supplier: Consume IdBasedComment<br/> - Supplier: Create IdBasedComment<br/> - Supplier: Provide IdBasedComment<br/> - Customer: Consume IdBasedComment<br/> - Customer: Visualize IdBasedComment together with CapacityGroup and MaterialDemand<br/> - Supplier: Visualize IdBasedComment together with CapacityGroup and MaterialDemand | - Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Request for update<br/> - Comments |
+| 2  | [Demand volatility metrics journey](#demand-volatility-metrics-journey)   | - Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | - Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Demand volatility metrics          |
+| 3  | [Simulated delta production journey](#simulated-delta-production-journey) | - Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | - Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Simulated delta production         |
+| 4  | [Load factors journey](#load-factors-journey)                             | - Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | - Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Load factors                       |
+| 5  | [Nesting journey](#nesting-journey)                                       | - Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | - Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Load factors                       |
+| 6  | [Inactivity journey](#inactivity-journey)                                 | - Customer: Prepare yourself<br/> - Supplier: Prepare yourself<br/> - Customer: Create WeekBasedMaterialDemand<br/> - Customer: Provide WeekBasedMaterialDemand<br/> - Supplier: Consume WeekBasedMaterialDemand<br/> - Supplier: Create WeekBasedCapacityGroup<br/> - Supplier: Provide WeekBasedCapacityGroup<br/> - Customer: Consume WeekBasedCapacityGroup<br/> - Customer: Visualize CapacityGroup together with MaterialDemand<br/> - Supplier: Visualize CapacityGroup together with MaterialDemand                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | - Providing and consuming demand data<br/> - Providing and consuming capacity data<br/> - Comparing demand and capacity data<br/> - Load factors                       |
 
 #### Base Journey
 
@@ -370,6 +372,97 @@ rect rgb(57,57,57)
   note right of c: GUI test
   c->>c: Visualize bottleneck calculation
   autonumber 5
+  s->>s: Visualize bottleneck calculation
+end
+```
+
+#### Nesting Journey
+
+``` mermaid
+sequenceDiagram
+actor c as Customer
+actor s as Supplier
+rect rgb(57,57,57)
+  note right of c: Prepare for E2E test
+  c->>c: Check EDC
+  c->>c: Check Data Assets
+  c->>c: Check Wallet
+  s->>s: Check EDC
+  s->>s: Check Data Assets
+  s->>s: Check Wallet
+end
+rect rgb(221,130,0)
+autonumber 1
+  note right of c: Transfer WeekBasedMaterialDemand
+  c->>s: FileTransfer ALPHA containing MaterialDemand ALPHA, BETA, GAMMA and DELTA
+  s->>c: HTTP 200 OK
+end
+rect rgb(128,149,0)
+  note right of c: Transfer WeekBasedCapacityGroup
+  s->>c: FileTransfer BETA containing CapacityGroup ALPHA, BETA and GAMMA
+  c->>s: HTTP 200 OK
+end
+rect rgb(57,57,57)
+  note right of c: GUI test
+  c->>c: Visualize bottleneck calculation
+  autonumber 5
+  s->>s: Visualize bottleneck calculation
+end
+```
+
+#### Inactivity Journey
+
+``` mermaid
+sequenceDiagram
+actor c as Customer
+actor s as Supplier
+rect rgb(57,57,57)
+  note right of c: Prepare for E2E test
+  c->>c: Check EDC
+  c->>c: Check Data Assets
+  c->>c: Check Wallet
+  s->>s: Check EDC
+  s->>s: Check Data Assets
+  s->>s: Check Wallet
+end
+rect rgb(221,130,0)
+autonumber 1
+  note right of c: Transfer WeekBasedMaterialDemand
+  c->>s: FileTransfer ALPHA containing MaterialDemand ALPHA_v1 and BETA
+  s->>c: HTTP 200 OK
+end
+rect rgb(128,149,0)
+  note right of c: Transfer WeekBasedCapacityGroup
+  s->>c: FileTransfer BETA containing CapacityGroup ALPHA_v1
+  c->>s: HTTP 200 OK
+end
+rect rgb(57,57,57)
+  note right of c: GUI test
+  c->>c: Visualize bottleneck calculation
+  autonumber 5
+  s->>s: Visualize bottleneck calculation
+end
+rect rgb(221,130,0)
+autonumber 6
+  note right of c: Transfer WeekBasedMaterialDemand
+  c->>s: FileTransfer GAMMA containing MaterialDemand ALPHA_v2
+  s->>c: HTTP 200 OK
+end
+rect rgb(57,57,57)
+  note right of c: GUI test
+  c->>c: Visualize bottleneck calculation
+  autonumber 8
+  s->>s: Visualize bottleneck calculation
+end
+rect rgb(128,149,0)
+  note right of c: Transfer WeekBasedCapacityGroup
+  s->>c: FileTransfer BETA containing CapacityGroup ALPHA_v2
+  c->>s: HTTP 200 OK
+end
+rect rgb(57,57,57)
+  note right of c: GUI test
+  c->>c: Visualize bottleneck calculation
+  autonumber 11
   s->>s: Visualize bottleneck calculation
 end
 ```
