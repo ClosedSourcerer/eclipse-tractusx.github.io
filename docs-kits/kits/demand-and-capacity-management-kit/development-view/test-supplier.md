@@ -232,6 +232,44 @@ Examples:
 
 </details>
 
+### WIP Prepare for nesting journey
+
+<details>
+<summary>This test ensures that the supplier is aware of the sequence of communication and naming conventions within the load factors journey.</summary>
+
+```cucumber
+Feature: Supplier: Prepare yourself
+  
+  Scenario Outline: Prepare for nesting journey
+  Given I want to execute the nesting journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the load factors journey successfully
+  When the test gets executed
+  Then it should work as intended
+
+Examples:
+| object | function | test |
+```
+
+</details>
+
+### WIP Prepare for inactivity journey
+
+<details>
+<summary>This test ensures that the supplier is aware of the sequence of communication and naming conventions within the load factors journey.</summary>
+
+```cucumber
+Feature: Supplier: Prepare yourself
+  
+  Scenario Outline: Prepare for inactivity journey
+  Given I want to execute the inactivity journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the load factors journey successfully
+  When the test gets executed
+  Then it should work as intended
+
+Examples:
+| object   | function                                                                                 | test                                                                                                          |
+```
+
+</details>
+
 ## Supplier: Consume WeekBasedMaterialDemand
 
 ### Consume valid WeekBasedMaterialDemand
@@ -345,6 +383,46 @@ Feature: Supplier: Consume WeekBasedMaterialDemand
 
 Scenario Outline: Consume WeekBasedMaterialDemand for load factors journey
   Given this is my entry point into the load factors journey 
+  When I try to consume  <testDemand> provided by my customer within <fileTransfer>
+  Then I should be able to consume the data and send <http status code> to my customer.
+
+Examples:
+| testDemand        | fileTransfer | http status code |
+| MD_alpha, MD_beta | FT_alpha     | 200 OK           |
+```
+
+</details>
+
+### WIP Consume WeekBasedMaterialDemand for nesting journey
+
+<details>
+<summary>The supplier receives the previously created WeekBasedMaterialDemand from the customer.</summary>
+
+```cucumber
+Feature: Supplier: Consume WeekBasedMaterialDemand
+
+Scenario Outline: Consume WeekBasedMaterialDemand for nesting journey
+  Given this is my entry point into the nesting journey 
+  When I try to consume  <testDemand> provided by my customer within <fileTransfer>
+  Then I should be able to consume the data and send <http status code> to my customer.
+
+Examples:
+| testDemand        | fileTransfer | http status code |
+| MD_alpha, MD_beta | FT_alpha     | 200 OK           |
+```
+
+</details>
+
+### WIP Consume WeekBasedMaterialDemand for inactivity journey
+
+<details>
+<summary>The supplier receives the previously created WeekBasedMaterialDemand from the customer.</summary>
+
+```cucumber
+Feature: Supplier: Consume WeekBasedMaterialDemand
+
+Scenario Outline: Consume WeekBasedMaterialDemand for inactivity journey
+  Given this is my entry point into the inactivity journey 
   When I try to consume  <testDemand> provided by my customer within <fileTransfer>
   Then I should be able to consume the data and send <http status code> to my customer.
 
@@ -795,6 +873,94 @@ Examples:
 
 </details>
 
+### WIP Create WeekBasedCapacityGroup for nesting journey
+
+<details>
+<summary>The supplier creates one WeekBasedCapacityGroup used by the nesting journey.</summary>
+
+```cucumber
+Feature: Customer: Create WeekBasedCapacityGroup
+
+Scenario Outline: Try to generate WeekBasedCapacityGroup for nesting journey using different <v_tests>
+  Given   the value for the property "name"                           is <v_name>
+  *       the value for the property "capacityGroupId"                is <v_capacityGroupId>
+  *       the value for the property "changedAt"                      is <v_changedAt>
+  *       the value for the property "customer"                       is <v_customer>
+  *       the value for the property "supplier"                       is <v_supplier>
+  *       the value for the property "capacityGroupIsInactive"        is <v_capacityGroupIsInactive>
+
+  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>
+  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>
+
+  *       the value for the property "linkedDemandSeries"             contains entities
+  *       the value for the property "materialNumberCustomer"         is <1_materialNumberCustomer>   for the first   entity "LinkedDemandSeries"
+  *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "LinkedDemandSeries"
+  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "LinkedDemandSeries"
+  *       the value for the property "loadFactor"                     is <1_loadFactor>               for the first   entity "LinkedDemandSeries"
+  *       the value for the property "materialNumberCustomer"         is <2_materialNumberCustomer>   for the second  entity "LinkedDemandSeries"
+  *       the value for the property "customerLocation"               is <2_customerLocation>         for the second  entity "LinkedDemandSeries"
+  *       the value for the property "demandCategoryCode"             is <2_demandCategoryCode>       for the second  entity "LinkedDemandSeries"
+  *       the value for the property "loadFactor"                     is <2_loadFactor>               for the second  entity "LinkedDemandSeries"
+
+  *       the value for the property "capacities"                     contains entities
+  *       the value for the property "actualCapacity"                 is <v_actualCapacity>
+  *       the value for the property "agreedCapacity"                 is <v_agreedCapacity>
+  *       the value for the property "maximumCapacity"                is <v_maximumCapacity>
+  *       the value for the property "deltaProductionResult"          is <v_deltaProductionResult>
+  *       the value for the property "pointInTime"                    is <v_pointInTime>                           
+  When the application tries to generate the WeekBasedCapacityGroup
+  Then it should generate the WeekBasedCapacityGroup
+
+Examples:
+| v_tests | v_name              | v_capacityGroupId | v_changedAt | v_customer   | v_supplier   | v_capacityGroupIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | 1_materialNumberCustomer | 1_customerLocation | 1_demandCategoryCode | 1_loadFactor | 2_materialNumberCustomer | 2_customerLocation | 2_demandCategoryCode | 2_loadFactor | v_actualCapacity                        | v_agreedCapacity                        | v_maximumCapacity                       | v_deltaProductionResult | v_pointInTime                                                                                                 |
+```
+
+</details>
+
+### WIP Create WeekBasedCapacityGroup for inactivity journey
+
+<details>
+<summary>The supplier creates one WeekBasedCapacityGroup used by the inactivity journey.</summary>
+
+```cucumber
+Feature: Customer: Create WeekBasedCapacityGroup
+
+Scenario Outline: Try to generate WeekBasedCapacityGroup for inactivity journey using different <v_tests>
+  Given   the value for the property "name"                           is <v_name>
+  *       the value for the property "capacityGroupId"                is <v_capacityGroupId>
+  *       the value for the property "changedAt"                      is <v_changedAt>
+  *       the value for the property "customer"                       is <v_customer>
+  *       the value for the property "supplier"                       is <v_supplier>
+  *       the value for the property "capacityGroupIsInactive"        is <v_capacityGroupIsInactive>
+
+  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>
+  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>
+
+  *       the value for the property "linkedDemandSeries"             contains entities
+  *       the value for the property "materialNumberCustomer"         is <1_materialNumberCustomer>   for the first   entity "LinkedDemandSeries"
+  *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "LinkedDemandSeries"
+  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "LinkedDemandSeries"
+  *       the value for the property "loadFactor"                     is <1_loadFactor>               for the first   entity "LinkedDemandSeries"
+  *       the value for the property "materialNumberCustomer"         is <2_materialNumberCustomer>   for the second  entity "LinkedDemandSeries"
+  *       the value for the property "customerLocation"               is <2_customerLocation>         for the second  entity "LinkedDemandSeries"
+  *       the value for the property "demandCategoryCode"             is <2_demandCategoryCode>       for the second  entity "LinkedDemandSeries"
+  *       the value for the property "loadFactor"                     is <2_loadFactor>               for the second  entity "LinkedDemandSeries"
+
+  *       the value for the property "capacities"                     contains entities
+  *       the value for the property "actualCapacity"                 is <v_actualCapacity>
+  *       the value for the property "agreedCapacity"                 is <v_agreedCapacity>
+  *       the value for the property "maximumCapacity"                is <v_maximumCapacity>
+  *       the value for the property "deltaProductionResult"          is <v_deltaProductionResult>
+  *       the value for the property "pointInTime"                    is <v_pointInTime>                           
+  When the application tries to generate the WeekBasedCapacityGroup
+  Then it should generate the WeekBasedCapacityGroup
+
+Examples:
+| v_tests | v_name              | v_capacityGroupId | v_changedAt | v_customer   | v_supplier   | v_capacityGroupIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | 1_materialNumberCustomer | 1_customerLocation | 1_demandCategoryCode | 1_loadFactor | 2_materialNumberCustomer | 2_customerLocation | 2_demandCategoryCode | 2_loadFactor | v_actualCapacity                        | v_agreedCapacity                        | v_maximumCapacity                       | v_deltaProductionResult | v_pointInTime                                                                                                 |
+```
+
+</details>
+
 ## Supplier: Provide WeekBasedCapacityGroup
 
 ### Provide valid WeekBasedCapacityGroup
@@ -906,6 +1072,46 @@ Feature: Supplier: Provide WeekBasedCapacityGroup
 
 Scenario Outline: Provide WeekBasedCapacityGroup for load factors journey
   Given I have successfully created capacity group alpha as described in Create WeekBasedCapacityGroup for load factors journey
+  When I try to provide my customer with <testCapacityGroup> as <fileTransfer>
+  Then I should get <http status code> from my customer.
+
+Examples:
+| testCapacityGroup | fileTransfer | http status code |
+| CG_alpha          | FT_beta      | 200 OK           |
+```
+
+</details>
+
+### WIP Provide WeekBasedCapacityGroup for nesting journey
+
+<details>
+<summary>The supplier sends the previously created WeekBasedCapacityGroups to the customer.</summary>
+
+```cucumber
+Feature: Supplier: Provide WeekBasedCapacityGroup
+
+Scenario Outline: Provide WeekBasedCapacityGroup for nesting journey
+  Given I have successfully created capacity group alpha as described in Create WeekBasedCapacityGroup for load factors journey
+  When I try to provide my customer with <testCapacityGroup> as <fileTransfer>
+  Then I should get <http status code> from my customer.
+
+Examples:
+| testCapacityGroup | fileTransfer | http status code |
+| CG_alpha          | FT_beta      | 200 OK           |
+```
+
+</details>
+
+### WIP Provide WeekBasedCapacityGroup for inactivity journey
+
+<details>
+<summary>The supplier sends the previously created WeekBasedCapacityGroups to the customer.</summary>
+
+```cucumber
+Feature: Supplier: Provide WeekBasedCapacityGroup
+
+Scenario Outline: Provide WeekBasedCapacityGroup for inactivity journey
+  Given I have successfully created capacity group alpha as described in Create WeekBasedCapacityGroup for inactivity journey
   When I try to provide my customer with <testCapacityGroup> as <fileTransfer>
   Then I should get <http status code> from my customer.
 
@@ -1104,6 +1310,48 @@ Examples:
 
 </details>
 
+### WIP Calculation for nesting journey
+
+<details>
+<summary>The supplier compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes load factors into account.</summary>
+
+```cucumber
+Feature: Supplier: Visualize CapacityGroup together with MaterialDemand
+
+Scenario Outline: Calculation for nesting journey
+  Given    I have successfully consumed <WeekBasedMaterialDemand>
+  *        I have successfully created <WeekBasedCapacityGroup>
+  When     I compare demand and capacity data for <WeekBasedCapacityGroup>
+  Then     I should see <UI demand> that differs from <data demand> for <week> in <year>.
+  *        I should see <capacity data and UI unit of measure> that differs from <demand data unit of measure>.
+
+Examples:
+| WeekBasedCapacityGroup | WeekBasedMaterialDemand | week | year | UI demand | data demand | capacity data and UI unit of measure | demand data unit of measure |
+```
+
+</details>
+
+### WIP Calculation for inactivity journey
+
+<details>
+<summary>The supplier compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes load factors into account.</summary>
+
+```cucumber
+Feature: Supplier: Visualize CapacityGroup together with MaterialDemand
+
+Scenario Outline: Calculation for inactivity journey
+  Given    I have successfully consumed <WeekBasedMaterialDemand>
+  *        I have successfully created <WeekBasedCapacityGroup>
+  When     I compare demand and capacity data for <WeekBasedCapacityGroup>
+  Then     I should see <UI demand> that differs from <data demand> for <week> in <year>.
+  *        I should see <capacity data and UI unit of measure> that differs from <demand data unit of measure>.
+
+Examples:
+| WeekBasedCapacityGroup | WeekBasedMaterialDemand | week | year | UI demand | data demand | capacity data and UI unit of measure | demand data unit of measure |
+```
+
+</details>
+
 ## Supplier: Create IdBasedRequestForUpdate
 
 ### Create valid IdBasedRequestForUpdate
@@ -1131,7 +1379,6 @@ Examples:
 | [ {"materialDemandId" : "0157ba42-d2a8-4e28-8565-7b07830c3456"}]                                                               | {{OMITTED}}                                                                                               | Give me the specified aspect models                                                           |
 | {{OMITTED}}                                                                                                                    | [ {"capacityGroupId" : "0157ba42-d2a8-4e28-8565-7b07830c1110"} ]                                          | Give me the specified aspect models                                                           |
 | [ {"materialDemandId" : "e84f0078-cb3f-4917-8b56-8405c053d5ca"},{"materialDemandId" : "0157ba42-d2a8-4e28-8565-7b07830c3456"}] | {{OMITTED}}                                                                                               | Give me the specified aspect models                                                           |
-
 ```
 
 </details>
@@ -1156,7 +1403,6 @@ Examples:
 | v_weekBasedMaterialDemand | v_weekBasedCapacityGroup | error                                                 |
 | This should not compute   | {{OMITTED}}              | AspectModel Conformity Error: weekBasedMaterialDemand |
 | {{OMITTED}}               | This should not compute  | AspectModel Conformity Error: weekBasedCapacityGroup  |
-
 ```
 
 </details>
