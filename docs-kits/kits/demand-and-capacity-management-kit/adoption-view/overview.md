@@ -129,7 +129,7 @@ A supply network can be divided into a multitude of interlinking supply chains. 
 
 Figure: *Supply chain*
 
-DCM allows for demand and capacity information to be exchanged only within the individual business relationship. However, because within a supply chain mist companies act as a "one-up" in one business relationship, while acting as a "one-down" withing the next business relationship, the impact of increasing or decreasing demand or capacity anywhere in the supply chain can safely travel through the chain, reaching every single impacted company. This is how DCM builds chains, while at the same time ensuring data sovereignty.
+DCM allows for demand and capacity information to be exchanged only within the individual business relationship. However, because within a supply chain most companies act as a "one-up" in one business relationship, while acting as a "one-down" within the next business relationship, the impact of increasing or decreasing demand or capacity anywhere in the supply chain can safely travel through the chain, reaching every single impacted company. This is how DCM builds chains, while at the same time ensuring data sovereignty.
 
 ### Access and Usage Policies
 
