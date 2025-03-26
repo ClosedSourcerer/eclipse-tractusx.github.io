@@ -456,7 +456,7 @@ rect rgb(57,57,57)
 end
 rect rgb(128,149,0)
   note right of c: Transfer WeekBasedCapacityGroup
-  s->>c: FileTransfer BETA containing CapacityGroup ALPHA_v2
+  s->>c: FileTransfer DELTA containing CapacityGroup ALPHA_v2
   c->>s: HTTP 200 OK
 end
 rect rgb(57,57,57)
