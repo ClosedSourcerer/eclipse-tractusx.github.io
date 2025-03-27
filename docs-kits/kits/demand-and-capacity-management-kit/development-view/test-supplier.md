@@ -893,7 +893,7 @@ Examples:
 
 </details>
 
-### WIP Create WeekBasedCapacityGroup for nesting journey
+### Create WeekBasedCapacityGroup for nesting journey
 
 <details>
 <summary>The supplier creates one WeekBasedCapacityGroup used by the nesting journey.</summary>
@@ -912,27 +912,31 @@ Scenario Outline: Try to generate WeekBasedCapacityGroup for nesting journey usi
   *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>
   *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>
 
+  *       the value for the property "linkedCapacityGroups"           is <v_linkedCapacityGroups>
+
   *       the value for the property "linkedDemandSeries"             contains entities
   *       the value for the property "materialNumberCustomer"         is <1_materialNumberCustomer>   for the first   entity "LinkedDemandSeries"
   *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "LinkedDemandSeries"
   *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "LinkedDemandSeries"
-  *       the value for the property "loadFactor"                     is <1_loadFactor>               for the first   entity "LinkedDemandSeries"
   *       the value for the property "materialNumberCustomer"         is <2_materialNumberCustomer>   for the second  entity "LinkedDemandSeries"
   *       the value for the property "customerLocation"               is <2_customerLocation>         for the second  entity "LinkedDemandSeries"
   *       the value for the property "demandCategoryCode"             is <2_demandCategoryCode>       for the second  entity "LinkedDemandSeries"
-  *       the value for the property "loadFactor"                     is <2_loadFactor>               for the second  entity "LinkedDemandSeries"
+  *       the value for the property "materialNumberCustomer"         is <3_materialNumberCustomer>   for the third  entity "LinkedDemandSeries"
+  *       the value for the property "customerLocation"               is <3_customerLocation>         for the third  entity "LinkedDemandSeries"
+  *       the value for the property "demandCategoryCode"             is <3_demandCategoryCode>       for the third  entity "LinkedDemandSeries"
 
   *       the value for the property "capacities"                     contains entities
   *       the value for the property "actualCapacity"                 is <v_actualCapacity>
-  *       the value for the property "agreedCapacity"                 is <v_agreedCapacity>
   *       the value for the property "maximumCapacity"                is <v_maximumCapacity>
-  *       the value for the property "deltaProductionResult"          is <v_deltaProductionResult>
   *       the value for the property "pointInTime"                    is <v_pointInTime>                           
   When the application tries to generate the WeekBasedCapacityGroup
   Then it should generate the WeekBasedCapacityGroup
 
 Examples:
-| v_tests | v_name              | v_capacityGroupId | v_changedAt | v_customer   | v_supplier   | v_capacityGroupIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | 1_materialNumberCustomer | 1_customerLocation | 1_demandCategoryCode | 1_loadFactor | 2_materialNumberCustomer | 2_customerLocation | 2_demandCategoryCode | 2_loadFactor | v_actualCapacity                        | v_agreedCapacity                        | v_maximumCapacity                       | v_deltaProductionResult | v_pointInTime                                                                                                 |
+| v_tests  | v_name                | v_capacityGroupId | v_changedAt | v_customer   | v_supplier   | v_capacityGroupIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | v_linkedCapacityGroups     | 1_materialNumberCustomer | 1_customerLocation | 1_demandCategoryCode | 2_materialNumberCustomer | 2_customerLocation | 2_demandCategoryCode | 3_materialNumberCustomer | 3_customerLocation | 3_demandCategoryCode | v_actualCapacity                                                                                  | v_maximumCapacity                                                                                 | v_pointInTime                                                                                                                                                                                                               |
+| CG_alpha | Nesting Tester Head   | {{UUID_ID1}}      | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                     | unit:pieces     | false                    | {{UUID_ID2}}, {{UUID_ID3}} |                          |                    |                      |                          |                    |                      |                          |                    |                      | 3340,4650,4450,3910,790,4420,1170,4190,4270,4080,3860,4290,4310,1090,4240,3930,3460,3920,790,2750 | 3340,4650,4450,3910,790,4420,1170,4190,4270,4080,3860,4290,4310,1090,4240,3930,3460,3920,790,2750 | 2026-01-05,2026-08-05,2026-01-12,2026-01-19,2026-01-26,2026-02-02,2026-02-09,2026-02-16,2026-02-23,2026-03-02,2026-03-09,2026-03-16,2026-03-23,2026-03-30,2026-04-06,2026-04-13,2026-04-20,2026-04-27,2026-05-04,2026-05-11 |
+| CG_beta  | Nesting Tester Tail 1 | {{UUID_ID2}}      | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                     | unit:pieces     | false                    |                            | MNR-8540-CH063329.001    | {{BPNS_CUS1}}      | 0001                 | MNR-8549-CH706214.023    | {{BPNS_CUS2}}      | A1S1                 | MNR-8549-CH706214.023    | {{BPNS_CUS2}}      | PI01                 |                                                                                                   |                                                                                                   |                                                                                                                                                                                                                             |
+| CG_gamma | Nesting Tester Tail 2 | {{UUID_ID3}}      | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                     | unit:pieces     | false                    |                            | MNR-8538-CH809974.001    | {{BPNS_CUS3}}      | PO01                 |                          |                    |                      |                          |                    |                      |                                                                                                   |                                                                                                   |                                                                                                                                                                                                                             |
 ```
 
 </details>
@@ -1331,7 +1335,7 @@ Examples:
 
 </details>
 
-### WIP Calculation for nesting journey
+### Calculation for nesting journey
 
 <details>
 <summary>The supplier compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes nesting into account.</summary>
@@ -1347,8 +1351,8 @@ Scenario Outline: Calculation for nesting journey
   *        I should see that the calculation takes <WeekBasedMaterialDemand> into account because it is indirectly linked to <HeadWeekBasedCapacityGroup> via <WeekBasedCapacityGroup>
 
 Examples:
-| HeadWeekBasedCapacityGroup | WeekBasedCapacityGroup | WeekBasedMaterialDemand               | week | year | result | case | color |
-| CG_alpha                   | CG_beta, CG_gamma      | MD_alpha, MD_beta, MD_gamma, MD_Delta |      |      |        |      |       |
+| HeadWeekBasedCapacityGroup | WeekBasedCapacityGroup | WeekBasedMaterialDemand               | week               | year | result         | case                                                                  | color |
+| CG_alpha                   | CG_beta, CG_gamma      | MD_alpha, MD_beta, MD_gamma, MD_Delta | 2,3,4,5,6,7,8,9,10 | 2026 | zero deviation | (demand + deltaProductionResult) = actual capacity = maximum capacity | green |
 ```
 
 </details>

@@ -622,42 +622,44 @@ Examples:
 
 </details>
 
-### WIP Create WeekBasedMaterialDemand for nesting journey
+### Create WeekBasedMaterialDemand for nesting journey
 
 <details>
-<summary>The customer creates one WeekBasedMaterialDemand used by the nesting journey.</summary>
+<summary>The customer creates four WeekBasedMaterialDemand used by the nesting journey.</summary>
 
 ```cucumber
 Feature: Customer: Create WeekBasedMaterialDemand
 
-Scenario Outline: Try to generate WeekBasedMaterialDemand for load factors journey using different <v_tests>
-  Given   the value for the property "materialDemandId"               is <v_materialDemandId>
-  *       the value for the property "changedAt"                      is <v_changedAt>
-  *       the value for the property "customer"                       is <v_customer>
-  *       the value for the property "supplier"                       is <v_supplier>
-  *       the value for the property "materialDemandIsInactive"       is <v_materialDemandIsInactive>
+Scenario Outline: Try to generate WeekBasedMaterialDemand for nesting journey using different <v_tests>
+  Given   the value for the property "materialDemandId"               is <v_materialDemandId>           
+  *       the value for the property "changedAt"                      is <v_changedAt>                  
+  *       the value for the property "customer"                       is <v_customer>                   
+  *       the value for the property "supplier"                       is <v_supplier>                   
+  *       the value for the property "materialDemandIsInactive"       is <v_materialDemandIsInactive>   
+  
+  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>              
+  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>     
 
-  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>
-  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>
-
-  *       the value for the property "materialGlobalAssetId"          is <v_materialGlobalAssetId>
-  *       the value for the property "materialNumberCustomer"         is <v_materialNumberCustomer>
-  *       the value for the property "materialNumberSupplier"         is <v_materialNumberSupplier>
+  *       the value for the property "materialGlobalAssetId"          is <v_materialGlobalAssetId>      
+  *       the value for the property "materialNumberCustomer"         is <v_materialNumberCustomer>     
+  *       the value for the property "materialNumberSupplier"         is <v_materialNumberSupplier>     
   *       the value for the property "materialDescriptionCustomer"    is <v_materialDescriptionCustomer>
 
   *       the value for the property "demandSeries"                   contains entities
-  *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "DemandSeries"
-  *       the value for the property "expectedSupplierLocation"       is <1_expectedSupplierLocation> for the first   entity "DemandSeries"
-  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "DemandSeries"
-  *       the value for the property "demand"                         is <1_demand>                   for the first   entity "DemandSeries"
-  *       the value for the property "pointInTime"                    is <1_pointInTime>              for the first   entity "DemandSeries"
-  When the application tries to generate the WeekBasedCapacityGroup
+  *       the value for the property "customerLocation"               is <1_customerLocation>          for the first   entity "LinkedDemandSeries" 
+  *       the value for the property "expectedSupplierLocation"       is <1_expectedSupplierLocation>  for the first   entity "LinkedDemandSeries" 
+  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>        for the first   entity "LinkedDemandSeries" 
+  *       the value for the property "pointInTime"                    is <1_pointInTime>               for the first   entity "LinkedDemandSeries" 
+  *       the value for the property "demand"                         is <1_demand>                    for the first   entity "LinkedDemandSeries" 
+  When the application tries to generate the WeekBasedMaterialDemand
   Then it should generate the WeekBasedMaterialDemand
 
 Examples:
-| v_tests  | v_materialDemandId | v_changedAt | v_customer   | v_supplier   | v_materialDemandIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | v_materialGlobalAssetId | v_materialNumberCustomer | v_materialNumberSupplier | v_materialDescriptionCustomer | v_customerLocation | v_expectedSupplierLocation | v_demandCategoryCode | v_demand                        | v_pointInTime                                                                                                 |
-| MD_alpha | {{UUID_MD1}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA1}}            | MNR-8540-CH063329.001    | {{OMITTED}}              | {{DSC_MAT1}}                  | {{BPNS_CUS1}}      | {{BPNS_SUP1}}              | 0001                 | 80,50,100,75,60,90,20,110,225,0 | 2024-08-05,2026-05-18,2026-05-25,2026-06-01,2026-06-08,2026-06-15,2026-06-22,2026-06-29,2026-07-06,2026-07-13 |
-| MD_beta  | {{UUID_MD1}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA1}}            | MNR-8549-CH706214.023    | {{OMITTED}}              | {{DSC_MAT2}}                  | {{BPNS_CUS1}}      |                            | A1S1                 | 70,100,50,75,90,60,130,40,0,110 | 2024-08-05,2026-05-18,2026-05-25,2026-06-01,2026-06-08,2026-06-15,2026-06-22,2026-06-29,2026-07-06,2026-07-13 |
+| v_tests  | v_materialDemandId | v_changedAt | v_customer   | v_supplier   | v_materialDemandIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | v_materialGlobalAssetId | v_materialNumberCustomer | v_materialNumberSupplier | v_materialDescriptionCustomer | 1_customerLocation | 1_expectedSupplierLocation | 1_demandCategoryCode | 1_demand                                                                                  | 1_pointInTime                                                                                                                                                                                                               |
+| MD_alpha | {{UUID_MD1}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA1}}            | MNR-8540-CH063329.001    | {{OMITTED}}              | {{DSC_MAT1}}                  | {{BPNS_CUS1}}      | {{BPNS_SUP1}}              | 0001                 | 200,190,190,200,190,250,280,0,270,250,240,220,200,190,180,200,190,180,190,200             | 2026-01-05,2026-08-05,2026-01-12,2026-01-19,2026-01-26,2026-02-02,2026-02-09,2026-02-16,2026-02-23,2026-03-02,2026-03-09,2026-03-16,2026-03-23,2026-03-30,2026-04-06,2026-04-13,2026-04-20,2026-04-27,2026-05-04,2026-05-11 |
+| MD_beta  | {{UUID_MD2}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA2}}            | MNR-8549-CH706214.023    | {{OMITTED}}              | {{DSC_MAT2}}                  | {{BPNS_CUS2}}      | {{OMITTED}}                | A1S1                 | 100,100,100,100,100,100,100,100,100,100,100,200,100,200,200,100,100,200,100,200           | 2026-01-05,2026-08-05,2026-01-12,2026-01-19,2026-01-26,2026-02-02,2026-02-09,2026-02-16,2026-02-23,2026-03-02,2026-03-09,2026-03-16,2026-03-23,2026-03-30,2026-04-06,2026-04-13,2026-04-20,2026-04-27,2026-05-04,2026-05-11 |
+| MD_gamma | {{UUID_MD2}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA3}}            | MNR-8549-CH706214.023    | {{OMITTED}}              | {{DSC_MAT2}}                  | {{BPNS_CUS2}}      | {{OMITTED}}                | PI01                 | 500,200,500,400,500,500,300,500,500,600,600,600,800,700,800,600,600,800,500,900           | 2026-01-05,2026-08-05,2026-01-12,2026-01-19,2026-01-26,2026-02-02,2026-02-09,2026-02-16,2026-02-23,2026-03-02,2026-03-09,2026-03-16,2026-03-23,2026-03-30,2026-04-06,2026-04-13,2026-04-20,2026-04-27,2026-05-04,2026-05-11 |
+| MD_delta | {{UUID_MD3}}       | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                      | unit:pieces     | false                    | {{UUID_GA4}}            | MNR-8538-CH809974.001    | {{OMITTED}}              | {{DSC_MAT3}}                  | {{BPNS_CUS3}}      | {{OMITTED}}                | PO01                 | 2540,4160,3660,3210,0,3570,490,3590,3400,3130,2920,3270,3210,0,3060,3030,2570,2740,0,1450 | 2026-01-05,2026-08-05,2026-01-12,2026-01-19,2026-01-26,2026-02-02,2026-02-09,2026-02-16,2026-02-23,2026-03-02,2026-03-09,2026-03-16,2026-03-23,2026-03-30,2026-04-06,2026-04-13,2026-04-20,2026-04-27,2026-05-04,2026-05-11 |
 ```
 
 </details>
@@ -1213,7 +1215,7 @@ Examples:
 
 </details>
 
-### WIP Calculation for nesting journey
+### Calculation for nesting journey
 
 <details>
 <summary>The customer compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes nesting into account.</summary>
@@ -1229,8 +1231,8 @@ Scenario Outline: Calculation for nesting journey
   *        I should see that the calculation takes <WeekBasedMaterialDemand> into account because it is indirectly linked to <HeadWeekBasedCapacityGroup> via <WeekBasedCapacityGroup>
 
 Examples:
-| HeadWeekBasedCapacityGroup | WeekBasedCapacityGroup | WeekBasedMaterialDemand               | week | year | result | case | color |
-| CG_alpha                   | CG_beta, CG_gamma      | MD_alpha, MD_beta, MD_gamma, MD_Delta |      |      |        |      |       |
+| HeadWeekBasedCapacityGroup | WeekBasedCapacityGroup | WeekBasedMaterialDemand               | week               | year | result         | case                                                                  | color |
+| CG_alpha                   | CG_beta, CG_gamma      | MD_alpha, MD_beta, MD_gamma, MD_Delta | 2,3,4,5,6,7,8,9,10 | 2026 | zero deviation | (demand + deltaProductionResult) = actual capacity = maximum capacity | green |
 ```
 
 </details>
