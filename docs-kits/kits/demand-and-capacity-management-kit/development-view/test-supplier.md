@@ -232,40 +232,58 @@ Examples:
 
 </details>
 
-### WIP Prepare for nesting journey
+### Prepare for nesting journey
 
 <details>
-<summary>This test ensures that the supplier is aware of the sequence of communication and naming conventions within the load factors journey.</summary>
+<summary>This test ensures that the supplier is aware of the sequence of communication and naming conventions within the nesting journey.</summary>
 
 ```cucumber
 Feature: Supplier: Prepare yourself
   
   Scenario Outline: Prepare for nesting journey
-  Given I want to execute the nesting journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the load factors journey successfully
+  Given I want to execute the nesting journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the nesting journey successfully
   When the test gets executed
   Then it should work as intended
 
 Examples:
-| object | function | test |
+| object   | function                                                                                 | test                                                                                                  |
+| MD_alpha | A WeekBasedMaterialDemand created by the customer and transmitted via Filetransfer Alpha | Consume WeekBasedMaterialDemand for nesting journey                                                   |
+| MD_beta  | A WeekBasedMaterialDemand created by the customer and transmitted via Filetransfer Alpha | Consume WeekBasedMaterialDemand for nesting journey                                                   |
+| MD_gamma | A WeekBasedMaterialDemand created by the customer and transmitted via Filetransfer Alpha | Consume WeekBasedMaterialDemand for nesting journey                                                   |
+| MD_delta | A WeekBasedMaterialDemand created by the customer and transmitted via Filetransfer Alpha | Consume WeekBasedMaterialDemand for nesting journey                                                   |
+| CG_alpha | A WeekBasedCapacityGroup created by the supplier and transmitted via Filetransfer Beta   | Create WeekBasedCapacityGroup for nesting journey, Provide WeekBasedCapacityGroup for nesting journey |
+| CG_beta  | A WeekBasedCapacityGroup created by the supplier and transmitted via Filetransfer Beta   | Create WeekBasedCapacityGroup for nesting journey, Provide WeekBasedCapacityGroup for nesting journey |
+| CG_gamma | A WeekBasedCapacityGroup created by the supplier and transmitted via Filetransfer Beta   | Create WeekBasedCapacityGroup for nesting journey, Provide WeekBasedCapacityGroup for nesting journey |
+| FT_alpha | A Filetransfer providing WeekBasedMaterialDemand for the supplier to consume             | Consume WeekBasedMaterialDemand for nesting journey                                                   |
+| FT_beta  | A Filetransfer providing WeekBasedCapacityGroup for the customer to consume              | Provide WeekBasedCapacityGroup for nesting journey                                                    |
 ```
 
 </details>
 
-### WIP Prepare for inactivity journey
+### Prepare for inactivity journey
 
 <details>
-<summary>This test ensures that the supplier is aware of the sequence of communication and naming conventions within the load factors journey.</summary>
+<summary>This test ensures that the supplier is aware of the sequence of communication and naming conventions within the inactivity journey.</summary>
 
 ```cucumber
 Feature: Supplier: Prepare yourself
   
   Scenario Outline: Prepare for inactivity journey
-  Given I want to execute the inactivity journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the load factors journey successfully
+  Given I want to execute the inactivity journey which uses <object> in <test> to fulfill a certain <function> that I need to be aware of in order to execute my part of the inactivity journey successfully
   When the test gets executed
   Then it should work as intended
 
 Examples:
-| object   | function                                                                                 | test                                                                                                          |
+| object      | function                                                                                 | test                                                                                                  |
+| MD_alpha_v1 | A WeekBasedMaterialDemand created by the customer and transmitted via Filetransfer Alpha | Consume WeekBasedMaterialDemand for inactivity journey                                                |
+| MD_alpha_v2 | A WeekBasedMaterialDemand created by the customer and transmitted via Filetransfer Gamma | Consume WeekBasedMaterialDemand for inactivity journey                                                |
+| MD_beta     | A WeekBasedMaterialDemand created by the customer and transmitted via Filetransfer Alpha | Consume WeekBasedMaterialDemand for inactivity journey                                                |
+| CG_alpha_v1 | A WeekBasedCapacityGroup created by the supplier and transmitted via Filetransfer Beta   | Create WeekBasedCapacityGroup for nesting journey, Provide WeekBasedCapacityGroup for nesting journey |
+| CG_alpha_v2 | A WeekBasedCapacityGroup created by the supplier and transmitted via Filetransfer Delta  | Create WeekBasedCapacityGroup for nesting journey, Provide WeekBasedCapacityGroup for nesting journey |
+| FT_alpha    | A Filetransfer providing WeekBasedMaterialDemand for the supplier to consume             | Consume WeekBasedMaterialDemand for nesting journey                                                   |
+| FT_beta     | A Filetransfer providing WeekBasedCapacityGroup for the customer to consume              | Provide WeekBasedCapacityGroup for nesting journey                                                    |
+| FT_gamma    | A Filetransfer providing updated WeekBasedMaterialDemand for the supplier to consume     | Consume WeekBasedMaterialDemand for nesting journey                                                   |
+| FT_delta    | A Filetransfer providing updated WeekBasedCapacityGroup for the customer to consume      | Provide WeekBasedCapacityGroup for nesting journey                                                    |
 ```
 
 </details>
@@ -393,7 +411,7 @@ Examples:
 
 </details>
 
-### WIP Consume WeekBasedMaterialDemand for nesting journey
+### Consume WeekBasedMaterialDemand for nesting journey
 
 <details>
 <summary>The supplier receives the previously created WeekBasedMaterialDemand from the customer.</summary>
@@ -407,13 +425,13 @@ Scenario Outline: Consume WeekBasedMaterialDemand for nesting journey
   Then I should be able to consume the data and send <http status code> to my customer.
 
 Examples:
-| testDemand        | fileTransfer | http status code |
-| MD_alpha, MD_beta | FT_alpha     | 200 OK           |
+| testDemand                            | fileTransfer | http status code |
+| MD_alpha, MD_beta, MD_gamma, MD_delta | FT_alpha     | 200 OK           |
 ```
 
 </details>
 
-### WIP Consume WeekBasedMaterialDemand for inactivity journey
+### Consume WeekBasedMaterialDemand for inactivity journey
 
 <details>
 <summary>The supplier receives the previously created WeekBasedMaterialDemand from the customer.</summary>
@@ -427,8 +445,10 @@ Scenario Outline: Consume WeekBasedMaterialDemand for inactivity journey
   Then I should be able to consume the data and send <http status code> to my customer.
 
 Examples:
-| testDemand        | fileTransfer | http status code |
-| MD_alpha, MD_beta | FT_alpha     | 200 OK           |
+| testDemand           | fileTransfer | http status code |
+| MD_alpha_v1, MD_beta | FT_alpha     | 200 OK           |
+| MD_alpha_v2          | FT_gamma     | 200 OK           |
+
 ```
 
 </details>
@@ -1082,7 +1102,7 @@ Examples:
 
 </details>
 
-### WIP Provide WeekBasedCapacityGroup for nesting journey
+### Provide WeekBasedCapacityGroup for nesting journey
 
 <details>
 <summary>The supplier sends the previously created WeekBasedCapacityGroups to the customer.</summary>
@@ -1091,18 +1111,18 @@ Examples:
 Feature: Supplier: Provide WeekBasedCapacityGroup
 
 Scenario Outline: Provide WeekBasedCapacityGroup for nesting journey
-  Given I have successfully created capacity group alpha as described in Create WeekBasedCapacityGroup for load factors journey
+  Given I have successfully created capacity group alpha as described in Create WeekBasedCapacityGroup for nesting journey
   When I try to provide my customer with <testCapacityGroup> as <fileTransfer>
   Then I should get <http status code> from my customer.
 
 Examples:
-| testCapacityGroup | fileTransfer | http status code |
-| CG_alpha          | FT_beta      | 200 OK           |
+| testCapacityGroup           | fileTransfer | http status code |
+| CG_alpha, CG_beta, CG_gamma | FT_beta      | 200 OK           |
 ```
 
 </details>
 
-### WIP Provide WeekBasedCapacityGroup for inactivity journey
+### Provide WeekBasedCapacityGroup for inactivity journey
 
 <details>
 <summary>The supplier sends the previously created WeekBasedCapacityGroups to the customer.</summary>
@@ -1117,7 +1137,8 @@ Scenario Outline: Provide WeekBasedCapacityGroup for inactivity journey
 
 Examples:
 | testCapacityGroup | fileTransfer | http status code |
-| CG_alpha          | FT_beta      | 200 OK           |
+| CG_alpha_v1       | FT_beta      | 200 OK           |
+| CG_alpha_v2       | FT_delta     | 200 OK           |
 ```
 
 </details>
@@ -1313,20 +1334,21 @@ Examples:
 ### WIP Calculation for nesting journey
 
 <details>
-<summary>The supplier compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes load factors into account.</summary>
+<summary>The supplier compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes nesting into account.</summary>
 
 ```cucumber
 Feature: Supplier: Visualize CapacityGroup together with MaterialDemand
 
 Scenario Outline: Calculation for nesting journey
-  Given    I have successfully consumed <WeekBasedMaterialDemand>
-  *        I have successfully created <WeekBasedCapacityGroup>
-  When     I compare demand and capacity data for <WeekBasedCapacityGroup>
-  Then     I should see <UI demand> that differs from <data demand> for <week> in <year>.
-  *        I should see <capacity data and UI unit of measure> that differs from <demand data unit of measure>.
+  Given    I have successfully created <HeadWeekBasedCapacityGroup> and <WeekBasedCapacityGroup>
+  *        I have successfully consumed <WeekBasedMaterialDemand>
+  When     I compare demand and capacity data for <HeadWeekBasedCapacityGroup>
+  Then     I should get <result> for <week> in <year>
+  *        I should see that the calculation takes <WeekBasedMaterialDemand> into account because it is indirectly linked to <HeadWeekBasedCapacityGroup> via <WeekBasedCapacityGroup>
 
 Examples:
-| WeekBasedCapacityGroup | WeekBasedMaterialDemand | week | year | UI demand | data demand | capacity data and UI unit of measure | demand data unit of measure |
+| HeadWeekBasedCapacityGroup | WeekBasedCapacityGroup | WeekBasedMaterialDemand               | week | year | result | case | color |
+| CG_alpha                   | CG_beta, CG_gamma      | MD_alpha, MD_beta, MD_gamma, MD_Delta |      |      |        |      |       |
 ```
 
 </details>
@@ -1340,14 +1362,17 @@ Examples:
 Feature: Supplier: Visualize CapacityGroup together with MaterialDemand
 
 Scenario Outline: Calculation for inactivity journey
-  Given    I have successfully consumed <WeekBasedMaterialDemand>
-  *        I have successfully created <WeekBasedCapacityGroup>
+  Given    I have successfully created <WeekBasedCapacityGroup>
+  *        I have successfully consumed <WeekBasedMaterialDemand>
   When     I compare demand and capacity data for <WeekBasedCapacityGroup>
-  Then     I should see <UI demand> that differs from <data demand> for <week> in <year>.
-  *        I should see <capacity data and UI unit of measure> that differs from <demand data unit of measure>.
+  Then     I should get <result> for <week> in <year>
+  *        I should see that <inactive> is not taken into account
 
 Examples:
-| WeekBasedCapacityGroup | WeekBasedMaterialDemand | week | year | UI demand | data demand | capacity data and UI unit of measure | demand data unit of measure |
+| WeekBasedCapacityGroup | WeekBasedMaterialDemand | inactive | week | year | result | case | color |
+| CG_alpha_v1            | MD_alpha_v1, MD_beta    |          |      |      |        |      |       |
+| CG_alpha_v1            | MD_alpha_v2, MD_beta    | MD_alpha |      |      |        |      |       |
+| CG_alpha_v2            | MD_alpha_v2, MD_beta    | CG_alpha | N/A  | N/A  | N/A    | N/A  | N/A   |
 ```
 
 </details>

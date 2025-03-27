@@ -1251,10 +1251,10 @@ Scenario Outline: Calculation for inactivity journey
   *        I should see that <inactive> is not taken into account
 
 Examples:
-| WeekBasedCapacityGroup | WeekBasedMaterialDemand | inactive    | week | year | result | case | color |
-| CG_alpha_v1            | MD_alpha_v1, MD_beta    |             |      |      |        |      |       |
-| CG_alpha_v1            | MD_alpha_v2, MD_beta    | MD_alpha_v2 |      |      |        |      |       |
-| CG_alpha_v2            | MD_alpha_v2, MD_beta    | CG_alpha_v2 | N/A  | N/A  | N/A    | N/A  | N/A   |
+| WeekBasedCapacityGroup | WeekBasedMaterialDemand | inactive | week | year | result | case | color |
+| CG_alpha_v1            | MD_alpha_v1, MD_beta    |          |      |      |        |      |       |
+| CG_alpha_v1            | MD_alpha_v2, MD_beta    | MD_alpha |      |      |        |      |       |
+| CG_alpha_v2            | MD_alpha_v2, MD_beta    | CG_alpha | N/A  | N/A  | N/A    | N/A  | N/A   |
 ```
 
 </details>
