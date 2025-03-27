@@ -941,7 +941,7 @@ Examples:
 
 </details>
 
-### WIP Create WeekBasedCapacityGroup for inactivity journey
+### Create WeekBasedCapacityGroup for inactivity journey
 
 <details>
 <summary>The supplier creates one WeekBasedCapacityGroup used by the inactivity journey.</summary>
@@ -950,37 +950,37 @@ Examples:
 Feature: Customer: Create WeekBasedCapacityGroup
 
 Scenario Outline: Try to generate WeekBasedCapacityGroup for inactivity journey using different <v_tests>
-  Given   the value for the property "name"                           is <v_name>
-  *       the value for the property "capacityGroupId"                is <v_capacityGroupId>
-  *       the value for the property "changedAt"                      is <v_changedAt>
-  *       the value for the property "customer"                       is <v_customer>
-  *       the value for the property "supplier"                       is <v_supplier>
-  *       the value for the property "capacityGroupIsInactive"        is <v_capacityGroupIsInactive>
-
-  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>
-  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>
+  Given   the value for the property "name"                           is <v_name>                             
+  *       the value for the property "capacityGroupId"                is <v_capacityGroupId>                  
+  *       the value for the property "changedAt"                      is <v_changedAt>                        
+  *       the value for the property "customer"                       is <v_customer>                         
+  *       the value for the property "supplier"                       is <v_supplier>                                       
+  *       the value for the property "capacityGroupIsInactive"        is <v_capacityGroupIsInactive>          
+  
+  *       the value for the property "unitOfMeasure"                  is <v_unitOfMeasure>                    
+  *       the value for the property "unitOfMeasureIsOmitted"         is <v_unitOfMeasureIsOmitted>           
 
   *       the value for the property "linkedDemandSeries"             contains entities
-  *       the value for the property "materialNumberCustomer"         is <1_materialNumberCustomer>   for the first   entity "LinkedDemandSeries"
-  *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "LinkedDemandSeries"
-  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "LinkedDemandSeries"
-  *       the value for the property "loadFactor"                     is <1_loadFactor>               for the first   entity "LinkedDemandSeries"
+  *       the value for the property "materialNumberCustomer"         is <1_materialNumberCustomer>   for the first   entity "LinkedDemandSeries"            
+  *       the value for the property "customerLocation"               is <1_customerLocation>         for the first   entity "LinkedDemandSeries"    
+  *       the value for the property "demandCategoryCode"             is <1_demandCategoryCode>       for the first   entity "LinkedDemandSeries"  
   *       the value for the property "materialNumberCustomer"         is <2_materialNumberCustomer>   for the second  entity "LinkedDemandSeries"
   *       the value for the property "customerLocation"               is <2_customerLocation>         for the second  entity "LinkedDemandSeries"
-  *       the value for the property "demandCategoryCode"             is <2_demandCategoryCode>       for the second  entity "LinkedDemandSeries"
-  *       the value for the property "loadFactor"                     is <2_loadFactor>               for the second  entity "LinkedDemandSeries"
+  *       the value for the property "demandCategoryCode"             is <2_demandCategoryCode>       for the second  entity "LinkedDemandSeries"                     
 
-  *       the value for the property "capacities"                     contains entities
-  *       the value for the property "actualCapacity"                 is <v_actualCapacity>
-  *       the value for the property "agreedCapacity"                 is <v_agreedCapacity>
-  *       the value for the property "maximumCapacity"                is <v_maximumCapacity>
-  *       the value for the property "deltaProductionResult"          is <v_deltaProductionResult>
-  *       the value for the property "pointInTime"                    is <v_pointInTime>                           
+  *       the value for the property "capacities"                     contains entities 
+  *       the value for the property "actualCapacity"                 is <v_actualCapacity>                   
+  *       the value for the property "agreedCapacity"                 is <v_agreedCapacity>                   
+  *       the value for the property "maximumCapacity"                is <v_maximumCapacity>                  
+  *       the value for the property "deltaProductionResult"          is <v_deltaProductionResult>            
+  *       the value for the property "pointInTime"                    is <v_pointInTime>     
   When the application tries to generate the WeekBasedCapacityGroup
   Then it should generate the WeekBasedCapacityGroup
 
 Examples:
-| v_tests | v_name              | v_capacityGroupId | v_changedAt | v_customer   | v_supplier   | v_capacityGroupIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | 1_materialNumberCustomer | 1_customerLocation | 1_demandCategoryCode | 1_loadFactor | 2_materialNumberCustomer | 2_customerLocation | 2_demandCategoryCode | 2_loadFactor | v_actualCapacity                        | v_agreedCapacity                        | v_maximumCapacity                       | v_deltaProductionResult | v_pointInTime                                                                                                 |
+| v_tests  | v_name       | v_capacityGroupId | v_changedAt | v_customer   | v_supplier   | v_capacityGroupIsInactive | v_unitOfMeasure | v_unitOfMeasureIsOmitted | 1_materialNumberCustomer | 1_customerLocation | 1_demandCategory | 2_materialNumberCustomer | 2_customerLocation | 2_demandCategory | v_actualCapacity                                                              | v_agreedCapacity                                                                | v_maximumCapacity                                                             | v_pointInTime                                                                                                                                                                                                               |
+| alpha_v1 | {{STR_LOCA}} | {{UUID_CG1}}      | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | false                     | unit:pieces     | false                    | MNR-8540-CH063329.001    | {{BPNS_CUS1}}      | 0001             | MNR-8549-CH706214.023    | {{BPNS_CUS2}}      | A1S1             | 220,209,209,220,209,245,250,0,240,250,245,242,220,209,198,220,109,198,209,220 | 300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300 | 250,250,250,250,250,250,250,0,250,250,250,250,250,250,250,250,250,250,250,250 | 2026-01-05,2026-08-05,2026-01-12,2026-01-19,2026-01-26,2026-02-02,2026-02-09,2026-02-16,2026-02-23,2026-03-02,2026-03-09,2026-03-16,2026-03-23,2026-03-30,2026-04-06,2026-04-13,2026-04-20,2026-04-27,2026-05-04,2026-05-11 |
+| alpha_v2 | {{STR_LOCA}} | {{UUID_CG1}}      | {{TS_NOW}}  | {{BPNL_CUS}} | {{BPNL_SUP}} | true                      | unit:pieces     | false                    | MNR-8540-CH063329.001    | {{BPNS_CUS1}}      | 0001             | MNR-8549-CH706214.023    | {{BPNS_CUS2}}      | A1S1             | 220,209,209,220,209,245,250,0,240,250,245,242,220,209,198,220,109,198,209,220 | 300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300,300 | 250,250,250,250,250,250,250,0,250,250,250,250,250,250,250,250,250,250,250,250 | 2026-01-05,2026-08-05,2026-01-12,2026-01-19,2026-01-26,2026-02-02,2026-02-09,2026-02-16,2026-02-23,2026-03-02,2026-03-09,2026-03-16,2026-03-23,2026-03-30,2026-04-06,2026-04-13,2026-04-20,2026-04-27,2026-05-04,2026-05-11 |
 ```
 
 </details>
@@ -1357,7 +1357,7 @@ Examples:
 
 </details>
 
-### WIP Calculation for inactivity journey
+### Calculation for inactivity journey
 
 <details>
 <summary>The supplier compares the demand data, sent to the supplier, to the capacity data, received from the supplier. This comparison takes load factors into account.</summary>
@@ -1373,10 +1373,10 @@ Scenario Outline: Calculation for inactivity journey
   *        I should see that <inactive> is not taken into account
 
 Examples:
-| WeekBasedCapacityGroup | WeekBasedMaterialDemand | inactive | week | year | result | case | color |
-| CG_alpha_v1            | MD_alpha_v1, MD_beta    |          |      |      |        |      |       |
-| CG_alpha_v1            | MD_alpha_v2, MD_beta    | MD_alpha |      |      |        |      |       |
-| CG_alpha_v2            | MD_alpha_v2, MD_beta    | CG_alpha | N/A  | N/A  | N/A    | N/A  | N/A   |
+| WeekBasedCapacityGroup | WeekBasedMaterialDemand | inactive | week | year | result     | case                                        | color |
+| CG_alpha_v1            | MD_alpha_v1, MD_beta    |          | 2    | 2026 | bottleneck | Actual capacity < maximum capacity < demand | red   |
+| CG_alpha_v1            | MD_alpha_v2, MD_beta    | MD_alpha | 2    | 2026 | surplus    | Demand < actual capacity < maximum capacity | green |
+| CG_alpha_v2            | MD_alpha_v2, MD_beta    | CG_alpha | N/A  | N/A  | N/A        | N/A                                         | N/A   |
 ```
 
 </details>
